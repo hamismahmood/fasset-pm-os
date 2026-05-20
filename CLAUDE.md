@@ -32,6 +32,36 @@ Hamis Mahmood, Senior PM at Fasset (Shariah-compliant crypto super app, UAE/Bahr
 | Someone is mentioned | `context/People/<name>.md` |
 | New meeting transcript | `context/Meetings/transcript-protocol.md` |
 
+## Installed plugins
+
+All project-scoped. Marketplace: `claude-plugins-official` (default) + `phuryn/pm-skills` (GitHub).
+
+### PM Skills (`phuryn/pm-skills`)
+
+| Plugin | Key commands | Use for |
+| :--- | :--- | :--- |
+| `pm-product-discovery` | `/discover`, `/interview`, `/triage-requests`, `/setup-metrics` | Ideation, assumption testing, interview synthesis, feature prioritization |
+| `pm-product-strategy` | `/strategy`, `/business-model`, `/value-proposition`, `/pricing`, `/market-scan` | Vision, strategy canvas, lean canvas, SWOT, Porter's, Ansoff, monetization |
+| `pm-execution` | `/write-prd`, `/write-stories`, `/sprint`, `/plan-okrs`, `/pre-mortem`, `/transform-roadmap` | PRDs, OKRs, roadmaps, user stories, sprints, retros |
+| `pm-market-research` | — | Personas, segmentation, competitive analysis, sentiment analysis |
+| `pm-data-analytics` | — | SQL generation, cohort analysis, A/B test analysis |
+| `pm-go-to-market` | `/plan-launch`, `/growth-strategy`, `/battlecard` | GTM strategy, growth loops, ICP, beachhead segments |
+| `pm-marketing-growth` | — | North Star metric, positioning, product naming, value prop statements |
+| `pm-toolkit` | — | Grammar check, NDA drafting, privacy policy, resume review |
+
+### Official plugins (`claude-plugins-official`)
+
+| Plugin | Use for |
+| :--- | :--- |
+| `atlassian` | Jira issue creation/search/transitions, Confluence pages — use for all ticket work |
+| `figma` | Read/write Figma designs, design-to-code, component inspection |
+| `github` | PR reviews, issue management, repo operations |
+| `superpowers` | Meta-skills: parallel agents, git worktrees, TDD, brainstorming, plans |
+| `frontend-design` | UI component building, layout, production-quality frontend |
+| `supabase` | Database queries, schema management, Supabase MCP |
+| `claude-md-management` | Update and improve CLAUDE.md files |
+| `skill-creator` | Create new custom skills |
+
 Session start: load `MEMORY.md` only. Then check `_system/setup.md` — if any required tool is not connected, surface the missing tool(s) before proceeding. Everything else loads on-demand.
 
 ## Self-improvement
