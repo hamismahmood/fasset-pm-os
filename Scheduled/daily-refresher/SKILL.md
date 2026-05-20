@@ -8,8 +8,8 @@ description: 7am + 7pm PKT — silent OS update from Tactiq, Jira, Confluence, S
 This skill keeps the iClaude PM OS current. It runs twice a day and ingests new information from all sources, routing it to the right files. It does not summarise or brief — that is the daily-briefing's job. It writes facts.
 
 Before running, read:
-- `/Users/hamis.mahmood/Desktop/iClaude/MEMORY.md` (active projects, tickets, vendors)
-- `/Users/hamis.mahmood/Desktop/iClaude/CLAUDE.md` (folder map and routing rules)
+- `MEMORY.md` (active projects, tickets, vendors)
+- `CLAUDE.md` (folder map and routing rules)
 
 ---
 

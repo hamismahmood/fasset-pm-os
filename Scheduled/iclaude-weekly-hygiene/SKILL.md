@@ -8,8 +8,8 @@ description: Fridays 9pm PKT — deep hygiene pass across all OS files, Jira, Sl
 This is the weekly deep clean for Hamis's iClaude PM OS. It runs after the 7pm daily refresher on Fridays and does heavier work that doesn't need to happen every day: frontmatter re-verification, pruning stale entries, drift detection, and index regeneration. It ends with a Slack summary DM.
 
 Before running, read:
-- `/Users/hamis.mahmood/Desktop/iClaude/MEMORY.md`
-- `/Users/hamis.mahmood/Desktop/iClaude/context/SCHEMA.md`
+- `MEMORY.md`
+- `context/SCHEMA.md`
 
 ---
 
