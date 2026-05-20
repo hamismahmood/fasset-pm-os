@@ -10,9 +10,9 @@ Per-meeting transcripts live as one file per meeting in `context/Meetings/Transc
 
 ## Source: Tactiq via Google Drive
 
-Tactiq auto-saves transcripts to a Google Drive folder after every call (configured in Tactiq settings under Integrations → Google Drive). The daily-update-iclaude task reads from that folder using the Google Drive MCP.
+Tactiq auto-saves all call transcripts to a shared Google Drive folder (ID: `1i4EjU_F2LuEkOqHKh5u5YD0GctH0Zb-u`). The folder contains Fasset calls, SIHA calls, and personal calls — not everything is ingested. See filtering logic in `Scheduled/daily-update-iclaude/SKILL.md`.
 
-Until configured: manually export from Tactiq and drop into `context/Meetings/Transcripts/`.
+The daily-update-iclaude task reads new files from that folder using the Google Drive MCP.
 
 ## Processing contract
 

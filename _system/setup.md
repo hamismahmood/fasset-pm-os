@@ -26,11 +26,12 @@
 | :--- | :--- | :--- |
 | `gh` | GitHub CLI — for when this repo moves to GitHub | `brew install gh` |
 
-## Required setup (not yet connected)
+## Tactiq transcript folder
 
-| Tool | How to connect | Impact if missing |
-| :--- | :--- | :--- |
-| Tactiq → Google Drive | In Tactiq settings: enable Google Drive integration, point to a folder e.g. `Fasset/Transcripts/` | Transcripts must be manually exported until configured |
+Folder ID: `1i4EjU_F2LuEkOqHKh5u5YD0GctH0Zb-u`
+URL: https://drive.google.com/drive/folders/1i4EjU_F2LuEkOqHKh5u5YD0GctH0Zb-u
+
+Shared folder containing all Tactiq-saved call transcripts: Fasset internal calls, SIHA calls, and personal calls. Not all transcripts are Fasset-relevant — see daily-update-iclaude/SKILL.md for filtering logic.
 
 ## If a tool is missing
 > "Tool [X] is listed in _system/setup.md but is not connected.
