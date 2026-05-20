@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fasset PM OS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #161b27;
+      --surface-hover: #1a2035;
+      --border: #1e2535;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --accent: #6366f1;
+      --accent-light: #a5b4fc;
+      --panel-width: 360px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 24px 80px;
+      transition: padding-right 0.3s ease;
+    }
+
+    body.panel-open { padding-right: calc(var(--panel-width) + 24px); }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+
+    header h1 { font-size: 22px; font-weight: 600; color: #f1f5f9; }
+    header p { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+
+    .header-right { margin-left: auto; text-align: right; }
+    .header-right .badge {
+      font-size: 11px; background: var(--surface);
+      color: var(--text-muted); padding: 4px 10px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .header-right .hint {
+      font-size: 11px; color: var(--text-muted);
+      margin-top: 6px; opacity: 0.7;
+    }
+
+    /* ── Grid ── */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-full { grid-column: 1 / -1; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-hover);
+    }
+
+    .card-header h2 { font-size: 14px; font-weight: 600; color: #cbd5e1; }
+    .card-header .count {
+      margin-left: auto; font-size: 11px;
+      background: var(--bg); color: var(--text-muted);
+      padding: 2px 8px; border-radius: 10px;
+    }
+
+    .card-body { padding: 14px 18px; }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: #475569; margin-bottom: 10px; margin-top: 18px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    /* ── Clickable rows (domains, context) ── */
+    .row-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 9px 10px; margin: 0 -10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-bottom: 1px solid var(--border);
+    }
+    .row-item:last-child { border-bottom: none; }
+    .row-item:hover { background: var(--surface-hover); }
+    .row-item.active { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.2); }
+
+    .row-item .ri-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+    .row-item .ri-name { font-size: 13px; font-weight: 500; color: var(--accent-light); }
+    .row-item .ri-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+    .row-item .ri-badge {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 10px; padding: 2px 7px; border-radius: 8px;
+      white-space: nowrap; align-self: flex-start; margin-top: 2px;
+    }
+
+    .status-critical { background: #3b0f0f; color: #f87171; }
+    .status-active    { background: #0d2b1f; color: #34d399; }
+    .status-deadline  { background: #2b1d0d; color: #fb923c; }
+    .status-research  { background: #0d1f2b; color: #60a5fa; }
+
+    .ri-chevron {
+      margin-left: auto; flex-shrink: 0;
+      color: var(--text-muted); font-size: 12px;
+      align-self: center; transition: transform 0.2s;
+    }
+    .row-item.active .ri-chevron { transform: rotate(90deg); color: var(--accent-light); }
+
+    /* ── Domain grid ── */
+    .domain-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+    .domain-card {
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .domain-card:hover { border-color: var(--accent); background: rgba(99,102,241,0.07); }
+    .domain-card.active { border-color: var(--accent); background: rgba(99,102,241,0.12); }
+
+    .domain-card .d-name {
+      font-size: 13px; font-weight: 600;
+      color: var(--accent-light); margin-bottom: 4px;
+    }
+    .domain-card .d-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Skills ── */
+    .skills-legend {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--text-muted);
+    }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .skill-tag {
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 12px; color: var(--text-dim);
+      display: flex; align-items: center; gap: 7px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: #c7d2fe; background: rgba(99,102,241,0.07); }
+    .skill-tag.active { border-color: var(--accent); color: #c7d2fe; background: rgba(99,102,241,0.15); }
+
+    .skill-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    .cat-discovery { background: #60a5fa; }
+    .cat-strategy  { background: #34d399; }
+    .cat-execution { background: #f472b6; }
+    .cat-research  { background: #fb923c; }
+    .cat-analytics { background: #a78bfa; }
+    .cat-gtm       { background: #fbbf24; }
+    .cat-utility   { background: #94a3b8; }
+
+    /* ── Side Panel ── */
+    .side-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: var(--panel-width);
+      height: 100vh;
+      background: #111827;
+      border-left: 1px solid var(--border);
+      z-index: 100;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    .side-panel.open { transform: translateX(0); }
+
+    .panel-header {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .panel-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+    .panel-header-text { flex: 1; }
+    .panel-title { font-size: 15px; font-weight: 600; color: #f1f5f9; line-height: 1.3; }
+    .panel-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+    .panel-close {
+      background: none; border: none; color: var(--text-muted);
+      font-size: 20px; cursor: pointer; padding: 2px;
+      line-height: 1; flex-shrink: 0;
+      transition: color 0.15s;
+    }
+    .panel-close:hover { color: var(--text); }
+
+    .panel-body {
+      flex: 1; overflow-y: auto;
+      padding: 20px;
+    }
+
+    .panel-body p {
+      font-size: 13px; color: var(--text-dim);
+      line-height: 1.65; margin-bottom: 16px;
+    }
+
+    .panel-section { margin-bottom: 20px; }
+    .panel-section-label {
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-muted); margin-bottom: 8px;
+    }
+
+    .panel-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 5px 10px;
+      font-size: 12px; color: var(--accent-light);
+      font-family: monospace; margin-bottom: 6px;
+    }
+
+    .panel-list { list-style: none; }
+    .panel-list li {
+      font-size: 13px; color: var(--text-dim);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    .panel-list li:last-child { border-bottom: none; }
+    .panel-list li::before { content: "→ "; color: var(--text-muted); }
+
+    .panel-divider {
+      height: 1px; background: var(--border);
+      margin: 16px 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; font-size: 11px;
+      color: #334155; margin-top: 40px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+      .grid-full { grid-column: 1; }
+      .domain-grid { grid-template-columns: 1fr 1fr; }
+      body.panel-open { padding-right: 24px; }
+      .side-panel { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">F</div>
+    <div>
+      <h1>Fasset PM OS</h1>
+      <p>Hamis Mahmood · Senior PM · fasset.com</p>
+    </div>
+    <div class="header-right">
+      <div class="badge">Updated: 2026-05-20</div>
+      <div class="hint">Tap any item to explore</div>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- Projects -->
+    <div class="card">
+      <div class="card-header">
+        <span>📁</span>
+        <h2>Projects/</h2>
+        <span class="count">8 owned</span>
+      </div>
+      <div class="card-body" style="padding:8px 10px">
+        <div class="row-item" onclick="openPanel('project-usd')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">Global_USD_Account/</div><div class="ri-desc">IBAN — Keel, Due, money movement</div></div>
+          <span class="ri-badge status-critical">Critical</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-travel')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">Travel_Rule/</div><div class="ri-desc">AML compliance, tiered verification</div></div>
+          <span class="ri-badge status-deadline">Due May 22</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-soa')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">Statement_of_Account/</div><div class="ri-desc">Downloadable account statements</div></div>
+          <span class="ri-badge status-deadline">Due Jun 15</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-expansion')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">Global_Expansion/</div><div class="ri-desc">Country prioritization, marketing-led expansion</div></div>
+          <span class="ri-badge status-active">Active</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-p2p')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">P2P_Multiple_Sellers/</div><div class="ri-desc">P2P Express — multi-seller, PKR→USDT</div></div>
+          <span class="ri-badge status-active">PRD done</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-cow')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">COW/</div><div class="ri-desc">Customer Obsession Week</div></div>
+          <span class="ri-badge status-deadline">Ends May 25</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-mastercard')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">Mastercard_Issuing/</div><div class="ri-desc">Direct Mastercard relationship — strategic exploration</div></div>
+          <span class="ri-badge status-research">Research</span>
+        </div>
+        <div class="row-item" onclick="openPanel('project-team-os')">
+          <span class="ri-icon">📂</span>
+          <div><div class="ri-name">Team_OS/</div><div class="ri-desc">Claude Code team OS for Fasset</div></div>
+          <span class="ri-badge status-research">Research</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Radar -->
+    <div class="card">
+      <div class="card-header">
+        <span>📡</span>
+        <h2>Radar/</h2>
+        <span class="count">5 monitored</span>
+      </div>
+      <div class="card-body" style="padding:8px 10px">
+        <div class="row-item" onclick="openPanel('radar-cards')">
+          <span class="ri-icon">📄</span>
+          <div><div class="ri-name">Card_Strategy.md</div><div class="ri-desc">Cards product — Rafi's top priority</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('radar-zendesk')">
+          <span class="ri-icon">📄</span>
+          <div><div class="ri-name">Zendesk_SDK.md</div><div class="ri-desc">Native SDK migration — Sprint 12 planned</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('radar-biz')">
+          <span class="ri-icon">📄</span>
+          <div><div class="ri-name">Business_Banking.md</div><div class="ri-desc">Titan pilot for 3 business clients</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('radar-worldpay')">
+          <span class="ri-icon">📄</span>
+          <div><div class="ri-name">WorldPay_PSP.md</div><div class="ri-desc">PSP onboarding — country analysis</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('radar-45')">
+          <span class="ri-icon">📄</span>
+          <div><div class="ri-name">Fasset_4.5.md</div><div class="ri-desc">Major app redesign — design paused</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PM Domains -->
+    <div class="card grid-full">
+      <div class="card-header">
+        <span>🗂</span>
+        <h2>PM Domain Folders</h2>
+        <span class="count">6 domains · each has RULES.md + tasks.md</span>
+      </div>
+      <div class="card-body">
+        <div class="domain-grid">
+          <div class="domain-card" onclick="openPanel('domain-execution')">
+            <div class="d-name">📝 pm-execution/</div>
+            <div class="d-desc">PRDs, specs, stories, sprints</div>
+          </div>
+          <div class="domain-card" onclick="openPanel('domain-discovery')">
+            <div class="d-name">🔍 pm-discovery/</div>
+            <div class="d-desc">User research, interviews, call notes</div>
+          </div>
+          <div class="domain-card" onclick="openPanel('domain-partners')">
+            <div class="d-name">🤝 pm-partners/</div>
+            <div class="d-desc">Vendor management, contracts, comms</div>
+          </div>
+          <div class="domain-card" onclick="openPanel('domain-strategy')">
+            <div class="d-name">🗺 pm-strategy/</div>
+            <div class="d-desc">Roadmap, prioritization, market research</div>
+          </div>
+          <div class="domain-card" onclick="openPanel('domain-comms')">
+            <div class="d-name">💬 pm-comms/</div>
+            <div class="d-desc">Slack, email, stakeholder updates</div>
+          </div>
+          <div class="domain-card" onclick="openPanel('domain-data')">
+            <div class="d-name">📊 pm-data/</div>
+            <div class="d-desc">Analytics, Mixpanel, Metabase, metrics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context -->
+    <div class="card">
+      <div class="card-header">
+        <span>🧠</span>
+        <h2>context/</h2>
+        <span class="count">Standing knowledge base</span>
+      </div>
+      <div class="card-body" style="padding:8px 10px">
+        <div class="row-item" onclick="openPanel('ctx-people')">
+          <span class="ri-icon">👤</span>
+          <div><div class="ri-name">People/</div><div class="ri-desc">One file per person — load when someone is mentioned</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('ctx-meetings')">
+          <span class="ri-icon">📅</span>
+          <div><div class="ri-name">Meetings/</div><div class="ri-desc">Recurring meetings + transcripts</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('ctx-how')">
+          <span class="ri-icon">✍️</span>
+          <div><div class="ri-name">HOW_I_WORK.md</div><div class="ri-desc">Voice and style guide — all writing tasks load this</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('ctx-ongoings')">
+          <span class="ri-icon">🏢</span>
+          <div><div class="ri-name">COMPANY_ONGOINGS.md</div><div class="ri-desc">Current company context and initiatives</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('ctx-initiatives')">
+          <span class="ri-icon">🚀</span>
+          <div><div class="ri-name">Initiatives/</div><div class="ri-desc">Cross-cutting initiatives that span multiple projects</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('ctx-schema')">
+          <span class="ri-icon">🗃</span>
+          <div><div class="ri-name">SCHEMA.md</div><div class="ri-desc">OS conventions, file format standards</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- System -->
+    <div class="card">
+      <div class="card-header">
+        <span>⚙️</span>
+        <h2>System Files</h2>
+      </div>
+      <div class="card-body" style="padding:8px 10px">
+        <div class="row-item" onclick="openPanel('sys-memory')">
+          <span class="ri-icon">📌</span>
+          <div><div class="ri-name">MEMORY.md</div><div class="ri-desc">Master index — projects, tasks, vendors, context</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('sys-claude')">
+          <span class="ri-icon">🤖</span>
+          <div><div class="ri-name">CLAUDE.md</div><div class="ri-desc">Behavioral rules for Claude in this OS</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('sys-briefings')">
+          <span class="ri-icon">📅</span>
+          <div><div class="ri-name">briefings/</div><div class="ri-desc">Auto-generated daily briefing files</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('sys-scheduled')">
+          <span class="ri-icon">🔁</span>
+          <div><div class="ri-name">Scheduled/</div><div class="ri-desc">Automated task definitions — do not edit</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+        <div class="row-item" onclick="openPanel('sys-system')">
+          <span class="ri-icon">🛠</span>
+          <div><div class="ri-name">_system/</div><div class="ri-desc">Agents, hooks, skills, tools — ignore in normal sessions</div></div>
+          <span class="ri-chevron">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="card grid-full">
+      <div class="card-header">
+        <span>⚡</span>
+        <h2>PM Skills</h2>
+        <span class="count">65 skills · tap any to learn more</span>
+      </div>
+      <div class="card-body">
+        <div class="skills-legend">
+          <div class="legend-item"><div class="legend-dot cat-discovery"></div>Discovery</div>
+          <div class="legend-item"><div class="legend-dot cat-strategy"></div>Strategy</div>
+          <div class="legend-item"><div class="legend-dot cat-execution"></div>Execution</div>
+          <div class="legend-item"><div class="legend-dot cat-research"></div>Research</div>
+          <div class="legend-item"><div class="legend-dot cat-analytics"></div>Analytics</div>
+          <div class="legend-item"><div class="legend-dot cat-gtm"></div>GTM</div>
+          <div class="legend-item"><div class="legend-dot cat-utility"></div>Utility</div>
+        </div>
+
+        <div class="section-label">Discovery</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-brainstorm-ideas-new')"><div class="skill-dot cat-discovery"></div>brainstorm-ideas-new</div>
+          <div class="skill-tag" onclick="openPanel('sk-brainstorm-ideas-existing')"><div class="skill-dot cat-discovery"></div>brainstorm-ideas-existing</div>
+          <div class="skill-tag" onclick="openPanel('sk-brainstorm-experiments-new')"><div class="skill-dot cat-discovery"></div>brainstorm-experiments-new</div>
+          <div class="skill-tag" onclick="openPanel('sk-brainstorm-experiments-existing')"><div class="skill-dot cat-discovery"></div>brainstorm-experiments-existing</div>
+          <div class="skill-tag" onclick="openPanel('sk-brainstorm-okrs')"><div class="skill-dot cat-discovery"></div>brainstorm-okrs</div>
+          <div class="skill-tag" onclick="openPanel('sk-identify-assumptions-new')"><div class="skill-dot cat-discovery"></div>identify-assumptions-new</div>
+          <div class="skill-tag" onclick="openPanel('sk-identify-assumptions-existing')"><div class="skill-dot cat-discovery"></div>identify-assumptions-existing</div>
+          <div class="skill-tag" onclick="openPanel('sk-interview-script')"><div class="skill-dot cat-discovery"></div>interview-script</div>
+          <div class="skill-tag" onclick="openPanel('sk-summarize-interview')"><div class="skill-dot cat-discovery"></div>summarize-interview</div>
+          <div class="skill-tag" onclick="openPanel('sk-job-stories')"><div class="skill-dot cat-discovery"></div>job-stories</div>
+          <div class="skill-tag" onclick="openPanel('sk-user-personas')"><div class="skill-dot cat-discovery"></div>user-personas</div>
+          <div class="skill-tag" onclick="openPanel('sk-user-segmentation')"><div class="skill-dot cat-discovery"></div>user-segmentation</div>
+          <div class="skill-tag" onclick="openPanel('sk-ideal-customer-profile')"><div class="skill-dot cat-discovery"></div>ideal-customer-profile</div>
+          <div class="skill-tag" onclick="openPanel('sk-beachhead-segment')"><div class="skill-dot cat-discovery"></div>beachhead-segment</div>
+          <div class="skill-tag" onclick="openPanel('sk-customer-journey-map')"><div class="skill-dot cat-discovery"></div>customer-journey-map</div>
+        </div>
+
+        <div class="section-label">Strategy</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-product-strategy')"><div class="skill-dot cat-strategy"></div>product-strategy</div>
+          <div class="skill-tag" onclick="openPanel('sk-product-vision')"><div class="skill-dot cat-strategy"></div>product-vision</div>
+          <div class="skill-tag" onclick="openPanel('sk-north-star-metric')"><div class="skill-dot cat-strategy"></div>north-star-metric</div>
+          <div class="skill-tag" onclick="openPanel('sk-opportunity-solution-tree')"><div class="skill-dot cat-strategy"></div>opportunity-solution-tree</div>
+          <div class="skill-tag" onclick="openPanel('sk-outcome-roadmap')"><div class="skill-dot cat-strategy"></div>outcome-roadmap</div>
+          <div class="skill-tag" onclick="openPanel('sk-prioritize-features')"><div class="skill-dot cat-strategy"></div>prioritize-features</div>
+          <div class="skill-tag" onclick="openPanel('sk-prioritize-assumptions')"><div class="skill-dot cat-strategy"></div>prioritize-assumptions</div>
+          <div class="skill-tag" onclick="openPanel('sk-prioritization-frameworks')"><div class="skill-dot cat-strategy"></div>prioritization-frameworks</div>
+          <div class="skill-tag" onclick="openPanel('sk-lean-canvas')"><div class="skill-dot cat-strategy"></div>lean-canvas</div>
+          <div class="skill-tag" onclick="openPanel('sk-startup-canvas')"><div class="skill-dot cat-strategy"></div>startup-canvas</div>
+          <div class="skill-tag" onclick="openPanel('sk-business-model')"><div class="skill-dot cat-strategy"></div>business-model</div>
+          <div class="skill-tag" onclick="openPanel('sk-value-proposition')"><div class="skill-dot cat-strategy"></div>value-proposition</div>
+          <div class="skill-tag" onclick="openPanel('sk-value-prop-statements')"><div class="skill-dot cat-strategy"></div>value-prop-statements</div>
+          <div class="skill-tag" onclick="openPanel('sk-monetization-strategy')"><div class="skill-dot cat-strategy"></div>monetization-strategy</div>
+          <div class="skill-tag" onclick="openPanel('sk-pricing-strategy')"><div class="skill-dot cat-strategy"></div>pricing-strategy</div>
+        </div>
+
+        <div class="section-label">Execution</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-create-prd')"><div class="skill-dot cat-execution"></div>create-prd</div>
+          <div class="skill-tag" onclick="openPanel('sk-user-stories')"><div class="skill-dot cat-execution"></div>user-stories</div>
+          <div class="skill-tag" onclick="openPanel('sk-sprint-plan')"><div class="skill-dot cat-execution"></div>sprint-plan</div>
+          <div class="skill-tag" onclick="openPanel('sk-pre-mortem')"><div class="skill-dot cat-execution"></div>pre-mortem</div>
+          <div class="skill-tag" onclick="openPanel('sk-wwas')"><div class="skill-dot cat-execution"></div>wwas</div>
+          <div class="skill-tag" onclick="openPanel('sk-retro')"><div class="skill-dot cat-execution"></div>retro</div>
+          <div class="skill-tag" onclick="openPanel('sk-test-scenarios')"><div class="skill-dot cat-execution"></div>test-scenarios</div>
+          <div class="skill-tag" onclick="openPanel('sk-release-notes')"><div class="skill-dot cat-execution"></div>release-notes</div>
+          <div class="skill-tag" onclick="openPanel('sk-dummy-dataset')"><div class="skill-dot cat-execution"></div>dummy-dataset</div>
+        </div>
+
+        <div class="section-label">Research</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-competitor-analysis')"><div class="skill-dot cat-research"></div>competitor-analysis</div>
+          <div class="skill-tag" onclick="openPanel('sk-competitive-battlecard')"><div class="skill-dot cat-research"></div>competitive-battlecard</div>
+          <div class="skill-tag" onclick="openPanel('sk-market-segments')"><div class="skill-dot cat-research"></div>market-segments</div>
+          <div class="skill-tag" onclick="openPanel('sk-market-sizing')"><div class="skill-dot cat-research"></div>market-sizing</div>
+          <div class="skill-tag" onclick="openPanel('sk-swot-analysis')"><div class="skill-dot cat-research"></div>swot-analysis</div>
+          <div class="skill-tag" onclick="openPanel('sk-pestle-analysis')"><div class="skill-dot cat-research"></div>pestle-analysis</div>
+          <div class="skill-tag" onclick="openPanel('sk-porters-five-forces')"><div class="skill-dot cat-research"></div>porters-five-forces</div>
+          <div class="skill-tag" onclick="openPanel('sk-ansoff-matrix')"><div class="skill-dot cat-research"></div>ansoff-matrix</div>
+          <div class="skill-tag" onclick="openPanel('sk-analyze-feature-requests')"><div class="skill-dot cat-research"></div>analyze-feature-requests</div>
+          <div class="skill-tag" onclick="openPanel('sk-sentiment-analysis')"><div class="skill-dot cat-research"></div>sentiment-analysis</div>
+          <div class="skill-tag" onclick="openPanel('sk-stakeholder-map')"><div class="skill-dot cat-research"></div>stakeholder-map</div>
+        </div>
+
+        <div class="section-label">Analytics</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-metrics-dashboard')"><div class="skill-dot cat-analytics"></div>metrics-dashboard</div>
+          <div class="skill-tag" onclick="openPanel('sk-cohort-analysis')"><div class="skill-dot cat-analytics"></div>cohort-analysis</div>
+          <div class="skill-tag" onclick="openPanel('sk-ab-test-analysis')"><div class="skill-dot cat-analytics"></div>ab-test-analysis</div>
+          <div class="skill-tag" onclick="openPanel('sk-sql-queries')"><div class="skill-dot cat-analytics"></div>sql-queries</div>
+          <div class="skill-tag" onclick="openPanel('sk-summarize-meeting')"><div class="skill-dot cat-analytics"></div>summarize-meeting</div>
+        </div>
+
+        <div class="section-label">GTM</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-gtm-strategy')"><div class="skill-dot cat-gtm"></div>gtm-strategy</div>
+          <div class="skill-tag" onclick="openPanel('sk-gtm-motions')"><div class="skill-dot cat-gtm"></div>gtm-motions</div>
+          <div class="skill-tag" onclick="openPanel('sk-growth-loops')"><div class="skill-dot cat-gtm"></div>growth-loops</div>
+          <div class="skill-tag" onclick="openPanel('sk-marketing-ideas')"><div class="skill-dot cat-gtm"></div>marketing-ideas</div>
+          <div class="skill-tag" onclick="openPanel('sk-positioning-ideas')"><div class="skill-dot cat-gtm"></div>positioning-ideas</div>
+          <div class="skill-tag" onclick="openPanel('sk-product-name')"><div class="skill-dot cat-gtm"></div>product-name</div>
+        </div>
+
+        <div class="section-label">Utility</div>
+        <div class="skills-grid">
+          <div class="skill-tag" onclick="openPanel('sk-grammar-check')"><div class="skill-dot cat-utility"></div>grammar-check</div>
+          <div class="skill-tag" onclick="openPanel('sk-review-resume')"><div class="skill-dot cat-utility"></div>review-resume</div>
+          <div class="skill-tag" onclick="openPanel('sk-draft-nda')"><div class="skill-dot cat-utility"></div>draft-nda</div>
+          <div class="skill-tag" onclick="openPanel('sk-privacy-policy')"><div class="skill-dot cat-utility"></div>privacy-policy</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <footer>Fasset PM OS · iClaude · 2026-05-20</footer>
+
+</div><!-- /container -->
+
+<!-- Side Panel -->
+<div class="side-panel" id="sidePanel">
+  <div class="panel-header">
+    <div class="panel-icon" id="panelIcon">⚡</div>
+    <div class="panel-header-text">
+      <div class="panel-title" id="panelTitle">Title</div>
+      <div class="panel-subtitle" id="panelSubtitle">subtitle</div>
+    </div>
+    <button class="panel-close" onclick="closePanel()">×</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<script>
+  // ── Panel data ──────────────────────────────────────────────────────────────
+
+  const data = {
+
+    // Projects
+    'project-usd': {
+      icon: '📂', title: 'Global_USD_Account/', subtitle: 'Active — Critical',
+      body: `
+        <div class="panel-section">
+          <p>The IBAN product. Gives Fasset users a real USD bank account number (via Keel and Due) so they can receive international wire transfers and make payouts. The biggest revenue and compliance surface on Hamis's plate.</p>
+          <p>Currently managing SWIFT payments to UAE, ACH transfers via Due, promo code billing, and a KYC reliance migration. The Slack alert for non-USD deposits landing in the Keel IBAN just moved to QA.</p>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Key partners</div>
+          <ul class="panel-list">
+            <li>Keel — primary IBAN provider</li>
+            <li>Due — US-IBAN + local payouts (onboarding)</li>
+          </ul>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Active tickets (sample)</div>
+          <ul class="panel-list">
+            <li>HOR-481 — UAE Purpose of Payment Codes (QA)</li>
+            <li>HOR-537 — USD IBAN PDF confirmation (In Progress)</li>
+            <li>HOR-456 — ACH Transfers via Due (QA)</li>
+          </ul>
+        </div>`
+    },
+    'project-travel': {
+      icon: '📂', title: 'Travel_Rule/', subtitle: 'Active — Deadline May 22',
+      body: `
+        <div class="panel-section">
+          <p>UAE regulatory requirement: crypto deposits above certain thresholds must have counterparty information collected (FATF Travel Rule). Three tiers: self-declaration ($1K–$20K), verified wallet check (≥$20K), and SAFE Phase 1 integration with Notabene for automated compliance.</p>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Active tickets</div>
+          <ul class="panel-list">
+            <li>HOR-479 — UAE Virtual Assets Travel Rule (In Progress)</li>
+            <li>HOR-565 — Tier 1 Self-Declaration (In Progress)</li>
+            <li>HOR-566 — Tier 2 High-Value Verification (In Progress)</li>
+            <li>HOR-567 — Verified Wallet Store (In Progress)</li>
+            <li>HOR-627 — Notabene SAFE Phase 1 (To Do)</li>
+          </ul>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Key partner</div>
+          <ul class="panel-list"><li>Notabene — Travel Rule infrastructure</li></ul>
+        </div>`
+    },
+    'project-soa': {
+      icon: '📂', title: 'Statement_of_Account/', subtitle: 'Active — Bahrain deadline June 15',
+      body: `
+        <div class="panel-section">
+          <p>Downloadable and emailed account statements for users. Bahrain regulator has requested a consolidated statement by June 15 — flagged as a ~2-week engineering lift. Epic HOR-488 and its 5 stories are unassigned and have never been prioritized into a sprint.</p>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Open tickets</div>
+          <ul class="panel-list">
+            <li>HOR-489 — On-request statements</li>
+            <li>HOR-493 — Automated monthly/annual statements</li>
+            <li>HOR-496 — PDF content definition</li>
+            <li>HOR-500 — Generation engine</li>
+          </ul>
+        </div>`
+    },
+    'project-expansion': {
+      icon: '📂', title: 'Global_Expansion/', subtitle: 'Active',
+      body: `
+        <div class="panel-section">
+          <p>Country prioritization work and marketing-led expansion. Fasset currently serves 125+ countries but is licensed in 4. This project identifies the next markets to prioritize for full launch, regulatory coverage, and IBAN/card enablement.</p>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Open tasks</div>
+          <ul class="panel-list">
+            <li>Propose 5 additional countries to Gitesh</li>
+            <li>Nigeria T&C update for Rain — unblocks card KYC re-enablement</li>
+            <li>Cross-reference IBAN-disabled vs Keel restricted vs Due prohibited</li>
+            <li>Altof's Product Coverage Confluence page — awaiting PM team confirmation</li>
+          </ul>
+        </div>`
+    },
+    'project-p2p': {
+      icon: '📂', title: 'P2P_Multiple_Sellers/', subtitle: 'Active — PRD v1 written May 18',
+      body: `
+        <div class="panel-section">
+          <p>Redesigns the P2P Express buy flow so users can choose from multiple sellers instead of being locked to one. Key use case: PKR to USDT purchases in Pakistan. PRD v1 was written May 18.</p>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Context</div>
+          <ul class="panel-list">
+            <li>Current flow: single auto-matched seller</li>
+            <li>New flow: marketplace with seller comparison (price, trust score, speed)</li>
+            <li>A brainstorm on the full P2P Marketplace idea set was done May 20</li>
+          </ul>
+        </div>`
+    },
+    'project-cow': {
+      icon: '📂', title: 'COW/', subtitle: 'Active — Ends May 25',
+      body: `
+        <div class="panel-section">
+          <p>Customer Obsession Week. Company-wide initiative to have 100 user conversations before May 25 to generate real insights for Fasset Fusion (the June 2026 company offsite). Hamis is running his own conversations in parallel.</p>
+        </div>`
+    },
+    'project-mastercard': {
+      icon: '📂', title: 'Mastercard_Issuing/', subtitle: 'Research phase',
+      body: `
+        <div class="panel-section">
+          <p>Strategic exploration of a direct relationship with Mastercard for card issuing — bypassing or supplementing the current Rain card setup. Not started. Research phase only.</p>
+        </div>`
+    },
+    'project-team-os': {
+      icon: '📂', title: 'Team_OS/', subtitle: 'Research phase',
+      body: `
+        <div class="panel-section">
+          <p>Building a Claude Code operating system for the wider Fasset PM team — modelled on this PM OS. Goal: give every PM on the team a structured, AI-assisted workflow without needing to set it up from scratch.</p>
+        </div>`
+    },
+
+    // Radar
+    'radar-cards': {
+      icon: '📄', title: 'Card_Strategy.md', subtitle: 'Radar — Supporting Arundathi',
+      body: `<p>Fasset's prepaid card product (Rain-issued, Visa-linked). Rafi's top priority. Hamis is supporting Arundathi on this. Open tasks include a card operator pricing comparison (Ibrahim/Rafi ask) and resolving card issuance payment friction — payment gateway vs wallet balance.</p>`
+    },
+    'radar-zendesk': {
+      icon: '📄', title: 'Zendesk_SDK.md', subtitle: 'Radar — Tracking delivery',
+      body: `<p>Migrating Zendesk from a WebView integration to the native Messaging SDK (React Native bridge). Includes JWT auth tied to Fasset identity and push notifications via FCM/APNs. Four tickets (HOR-569–572) created, Sprint 12 planned. PRD is done.</p>`
+    },
+    'radar-biz': {
+      icon: '📄', title: 'Business_Banking.md', subtitle: 'Radar — Light-touch owner',
+      body: `<p>Titan pilot for 3 business clients. Hamis owns this lightly. Open: confirm Keel permission status for corporate entities, define IBAN assignment requirements for corporates, and a website first iteration review on Markup.io (Abigail, Hamza).</p>`
+    },
+    'radar-worldpay': {
+      icon: '📄', title: 'WorldPay_PSP.md', subtitle: 'Radar — Country analysis for Nawaz',
+      body: `<p>WorldPay PSP onboarding. Nawaz asked for a top-10 country market analysis for WorldPay underwriting. Pending framing clarification — not started.</p>`
+    },
+    'radar-45': {
+      icon: '📄', title: 'Fasset_4.5.md', subtitle: 'Radar — Not directly involved',
+      body: `<p>The major Fasset app redesign. Design work is paused. Hamis is not directly involved — just monitoring.</p>`
+    },
+
+    // Domains
+    'domain-execution': {
+      icon: '📝', title: 'pm-execution/', subtitle: 'PRDs, specs, stories, sprints',
+      body: `
+        <p>The delivery layer. Everything that turns a strategy decision into a shipped feature lives here: PRDs, user stories, sprint plans, acceptance criteria, and retrospectives.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">When to load RULES.md</div>
+          <ul class="panel-list">
+            <li>Before writing any PRD or spec</li>
+            <li>Before writing user stories or acceptance criteria</li>
+            <li>Before planning a sprint</li>
+          </ul>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Relevant skills</div>
+          <div class="panel-tag">create-prd</div> <div class="panel-tag">user-stories</div> <div class="panel-tag">sprint-plan</div> <div class="panel-tag">pre-mortem</div>
+        </div>`
+    },
+    'domain-discovery': {
+      icon: '🔍', title: 'pm-discovery/', subtitle: 'User research, interviews, call notes',
+      body: `
+        <p>Raw insight from users. Call notes, interview transcripts, and synthesized research live here. The <code>call-notes/</code> subfolder holds one file per user conversation.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">When to load RULES.md</div>
+          <ul class="panel-list">
+            <li>Before running or preparing for a user interview</li>
+            <li>Before synthesizing research into insights</li>
+          </ul>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Relevant skills</div>
+          <div class="panel-tag">interview-script</div> <div class="panel-tag">summarize-interview</div> <div class="panel-tag">user-personas</div> <div class="panel-tag">job-stories</div>
+        </div>`
+    },
+    'domain-partners': {
+      icon: '🤝', title: 'pm-partners/', subtitle: 'Vendor management, contracts, comms',
+      body: `
+        <p>All vendor and partner work. The <code>vendors/</code> subfolder holds one file per vendor (Keel, Due, Rain, Notabene, etc.) with relationship history, contacts, and open items.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">When to load RULES.md</div>
+          <ul class="panel-list">
+            <li>Before any vendor email, negotiation, or vendor-facing document</li>
+            <li>Also load the relevant vendor file from vendors/</li>
+          </ul>
+        </div>`
+    },
+    'domain-strategy': {
+      icon: '🗺', title: 'pm-strategy/', subtitle: 'Roadmap, prioritization, market research',
+      body: `
+        <p>The "where are we going and why" layer. Roadmaps, prioritization frameworks, market analysis, and competitive intelligence live here.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">Relevant skills</div>
+          <div class="panel-tag">product-strategy</div> <div class="panel-tag">outcome-roadmap</div> <div class="panel-tag">prioritize-features</div> <div class="panel-tag">market-sizing</div> <div class="panel-tag">competitor-analysis</div>
+        </div>`
+    },
+    'domain-comms': {
+      icon: '💬', title: 'pm-comms/', subtitle: 'Slack, email, stakeholder updates',
+      body: `
+        <p>Any writing that goes to another human — Slack messages, stakeholder emails, status updates, vendor comms. Always load <code>context/HOW_I_WORK.md</code> before drafting anything here.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">Key rule</div>
+          <ul class="panel-list">
+            <li>No em dashes in anything written on Hamis's behalf</li>
+            <li>Match formality of the thread being replied to</li>
+            <li>Write like a sharp colleague, not a corporate bot</li>
+          </ul>
+        </div>`
+    },
+    'domain-data': {
+      icon: '📊', title: 'pm-data/', subtitle: 'Analytics, Mixpanel, Metabase, metrics',
+      body: `
+        <p>Data and analytics work. Mixpanel event tracking, Metabase dashboard queries, KPI definitions, and cohort analysis. Load RULES.md before any analytics task.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">Relevant skills</div>
+          <div class="panel-tag">metrics-dashboard</div> <div class="panel-tag">cohort-analysis</div> <div class="panel-tag">ab-test-analysis</div> <div class="panel-tag">sql-queries</div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-section-label">Tools</div>
+          <ul class="panel-list">
+            <li>Mixpanel — event tracking (MCP not yet connected)</li>
+            <li>Metabase — dashboards (KYC drop-off, P2P, IBAN promo)</li>
+          </ul>
+        </div>`
+    },
+
+    // Context
+    'ctx-people': {
+      icon: '👤', title: 'context/People/', subtitle: 'One file per person',
+      body: `<p>Every time a person is mentioned in a task — teammate, stakeholder, vendor contact — Claude loads their file from here. Contains role, relationship history, communication preferences, and anything notable about working with them.</p><p>When someone new enters the picture, their file gets created here.</p>`
+    },
+    'ctx-meetings': {
+      icon: '📅', title: 'context/Meetings/', subtitle: 'Recurring meetings + transcripts',
+      body: `<p>One file per recurring meeting. Loaded automatically when working on meeting prep or follow-up. Transcripts from individual sessions also live here after processing.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">Current cadence</div>
+          <ul class="panel-list">
+            <li>Product Daily Standup — daily 19:00 PKT (Zane)</li>
+            <li>IBAN Standup — daily 12:00 PKT (Taha)</li>
+            <li>Sprint Planning — biweekly Fri 16:00 PKT (Zara)</li>
+            <li>CX & Product Feedback — weekly Fri 17:00 PKT (Nashit)</li>
+          </ul>
+        </div>`
+    },
+    'ctx-how': {
+      icon: '✍️', title: 'HOW_I_WORK.md', subtitle: 'Voice and style guide',
+      body: `<p>The most important file for any writing task. Defines Hamis's voice, tone, and style — so that anything Claude drafts on his behalf sounds like him, not like a bot.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">Always load this before</div>
+          <ul class="panel-list">
+            <li>Any Slack message or email</li>
+            <li>PRDs, specs, vendor docs</li>
+            <li>Stakeholder updates</li>
+            <li>Any writing produced on Hamis's behalf</li>
+          </ul>
+        </div>`
+    },
+    'ctx-ongoings': {
+      icon: '🏢', title: 'COMPANY_ONGOINGS.md', subtitle: 'Current company context',
+      body: `<p>Rolling log of what's happening across Fasset — announcements, milestones, org changes. Loaded when context about the broader company matters for a task.</p>
+        <div class="panel-section">
+          <div class="panel-section-label">Recent notable item</div>
+          <ul class="panel-list"><li>$51M Series B raised May 15, 2026 — announced publicly</li></ul>
+        </div>`
+    },
+    'ctx-initiatives': {
+      icon: '🚀', title: 'context/Initiatives/', subtitle: 'Cross-cutting initiatives',
+      body: `<p>Initiatives that span multiple projects or involve multiple teams — things that don't belong to a single project folder but need to be tracked at the OS level.</p>`
+    },
+    'ctx-schema': {
+      icon: '🗃', title: 'SCHEMA.md', subtitle: 'OS conventions and file format standards',
+      body: `<p>The blueprint for how this OS is structured. Defines file naming conventions, frontmatter formats, how projects are set up, and how memory files should be written. Read this before creating new folders or files in the OS.</p>`
+    },
+
+    // System files
+    'sys-memory': {
+      icon: '📌', title: 'MEMORY.md', subtitle: 'Master index',
+      body: `<p>The single source of truth for everything Claude needs to know at session start: active projects, open Jira tasks, key vendors, recurring meetings, and company context. Loaded first, every session.</p><p>This file is an index — detailed facts live in project-level MEMORY.md files. Both must be kept in sync.</p>`
+    },
+    'sys-claude': {
+      icon: '🤖', title: 'CLAUDE.md', subtitle: 'Behavioral rules for Claude',
+      body: `<p>The instruction file for Claude Code in this OS. Defines knowledge routing (which files to load for which tasks), the folder map, available skills and commands, and cross-cutting rules like "no em dashes" and "load HOW_I_WORK.md for all writing."</p><p>A global CLAUDE.md also lives at <code>~/.claude/CLAUDE.md</code> and applies across every session on this machine.</p>`
+    },
+    'sys-briefings': {
+      icon: '📅', title: 'briefings/', subtitle: 'Auto-generated daily briefing files',
+      body: `<p>One file per day, generated automatically each morning. Pulls from Google Calendar, Gmail, and Slack to give a structured overview of the day: meetings, open threads, and priorities.</p>`
+    },
+    'sys-scheduled': {
+      icon: '🔁', title: 'Scheduled/', subtitle: 'Automated task definitions',
+      body: `<p>Cron-style automated tasks that run on a schedule (daily briefing, weekly hygiene, daily refresher). These are configured and managed by the harness — do not edit manually in normal sessions.</p>`
+    },
+    'sys-system': {
+      icon: '🛠', title: '_system/', subtitle: 'Agents, hooks, skills, tools',
+      body: `<p>The internal machinery of the OS: custom agents, shell hooks, PM skills, and tool configurations. Managed separately and ignored during normal PM work sessions.</p>`
+    },
+
+    // Skills
+    'sk-brainstorm-ideas-new': {
+      icon: '⚡', title: 'brainstorm-ideas-new', subtitle: 'Discovery · /brainstorm',
+      body: `<p>Generate a wide set of product ideas for a new product or problem space. Runs from three lenses: PM (user value, business model), Designer (UX, jobs to be done), and Engineer (technical feasibility, build vs buy).</p>
+        <div class="panel-tag">/brainstorm</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Structured idea set with rationale, grouped by theme. Top 5 recommendations with trade-offs.</p>`
+    },
+    'sk-brainstorm-ideas-existing': {
+      icon: '⚡', title: 'brainstorm-ideas-existing', subtitle: 'Discovery · /brainstorm',
+      body: `<p>Generate product ideas for an existing product or feature. Uses context from current usage, user pain points, and competitive gaps to surface high-leverage opportunities.</p>
+        <div class="panel-tag">/brainstorm</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Structured idea set anchored to existing product reality. Includes quick wins and bigger bets.</p>`
+    },
+    'sk-brainstorm-experiments-new': {
+      icon: '⚡', title: 'brainstorm-experiments-new', subtitle: 'Discovery',
+      body: `<p>Generate experiment ideas to validate assumptions for a new product or feature before committing to full build. Focuses on cheap, fast ways to test the most critical unknowns.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Experiment menu sorted by assumption risk and test cost.</p>`
+    },
+    'sk-brainstorm-experiments-existing': {
+      icon: '⚡', title: 'brainstorm-experiments-existing', subtitle: 'Discovery',
+      body: `<p>Generate experiment ideas for an existing live feature — A/B tests, staged rollouts, or lightweight research sprints to improve outcomes without full re-designs.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Prioritized experiment list with hypothesis, metric, and minimum test design.</p>`
+    },
+    'sk-brainstorm-okrs': {
+      icon: '⚡', title: 'brainstorm-okrs', subtitle: 'Discovery · /plan-okrs',
+      body: `<p>Draft a set of Objectives and Key Results for a team, product area, or quarter. Starts from stated priorities and works backwards to measurable outcomes.</p>
+        <div class="panel-tag">/plan-okrs</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Draft OKR set with 3-5 objectives and 2-3 KRs each. Flags vanity metrics.</p>`
+    },
+    'sk-identify-assumptions-new': {
+      icon: '⚡', title: 'identify-assumptions-new', subtitle: 'Discovery',
+      body: `<p>Surface and rank the key assumptions embedded in a new product idea — before any work starts. Separates desirability, feasibility, viability, and regulatory assumptions.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Ranked assumption register with risk level and suggested validation method.</p>`
+    },
+    'sk-identify-assumptions-existing': {
+      icon: '⚡', title: 'identify-assumptions-existing', subtitle: 'Discovery',
+      body: `<p>Audit the assumptions baked into an existing product decision, PRD, or strategy document. Useful before a major investment or when a product is underperforming.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Annotated list of assumptions, which are still untested, and what to validate first.</p>`
+    },
+    'sk-interview-script': {
+      icon: '⚡', title: 'interview-script', subtitle: 'Discovery · /interview',
+      body: `<p>Write a structured user interview guide. Produces an opening, warm-up questions, core topic questions (jobs to be done, pain points, current workarounds), and a closing. Anti-pattern: no leading questions.</p>
+        <div class="panel-tag">/interview</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Ready-to-run interview script with facilitator notes.</p>`
+    },
+    'sk-summarize-interview': {
+      icon: '⚡', title: 'summarize-interview', subtitle: 'Discovery · /meeting-notes',
+      body: `<p>Process a raw user interview transcript into structured insights: key quotes, jobs to be done, pain points, unmet needs, and surprising findings. Separates signal from noise.</p>
+        <div class="panel-tag">/meeting-notes</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Interview summary doc ready to link in pm-discovery/call-notes/.</p>`
+    },
+    'sk-job-stories': {
+      icon: '⚡', title: 'job-stories', subtitle: 'Discovery',
+      body: `<p>Write job stories in the format "When [situation], I want to [motivation], so I can [outcome]." A more context-rich alternative to traditional user stories. Grounded in JTBD (jobs to be done) theory.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Set of job stories tied to a specific user segment and problem area.</p>`
+    },
+    'sk-user-personas': {
+      icon: '⚡', title: 'user-personas', subtitle: 'Discovery · /research-users',
+      body: `<p>Build behaviorally grounded user personas. Each persona covers: who they are, what job they're trying to do, current tools and workarounds, frustrations, and what success looks like.</p>
+        <div class="panel-tag">/research-users</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> 2-4 detailed personas with narrative, quote, and design implications.</p>`
+    },
+    'sk-user-segmentation': {
+      icon: '⚡', title: 'user-segmentation', subtitle: 'Discovery',
+      body: `<p>Slice your user base into meaningful segments — by behavior, need, demographics, or lifecycle stage. Useful for prioritizing which segment to optimize for or designing differentiated experiences.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Segmentation table with segment size (where known), defining characteristics, and strategic value.</p>`
+    },
+    'sk-ideal-customer-profile': {
+      icon: '⚡', title: 'ideal-customer-profile', subtitle: 'Discovery',
+      body: `<p>Define the ICP: the specific type of customer who gets maximum value from the product and is cheapest to acquire and retain. Goes deeper than a persona — includes firmographics, triggers, and negative signals.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> ICP definition with positive indicators, disqualifiers, and "why now" trigger events.</p>`
+    },
+    'sk-beachhead-segment': {
+      icon: '⚡', title: 'beachhead-segment', subtitle: 'Discovery',
+      body: `<p>Identify the single best initial market segment to dominate before expanding. Based on Geoffrey Moore's "Crossing the Chasm" framework. Forces a concrete choice between multiple plausible entry points.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Scored comparison of candidate segments with a clear recommendation and the logic behind it.</p>`
+    },
+    'sk-customer-journey-map': {
+      icon: '⚡', title: 'customer-journey-map', subtitle: 'Discovery',
+      body: `<p>Map the end-to-end customer experience across awareness, consideration, activation, use, and retention. Highlights emotional highs and lows, pain points, and moments of truth.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Journey map table or narrative with stage, action, emotion, and PM opportunity for each step.</p>`
+    },
+
+    'sk-product-strategy': {
+      icon: '⚡', title: 'product-strategy', subtitle: 'Strategy · /strategy',
+      body: `<p>Define the strategic direction for a product or product area: the problem being solved, the target customer, the differentiated approach, and the bets being made. Structures the "why this, why now, why us" story.</p>
+        <div class="panel-tag">/strategy</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> One-page strategy narrative + key choices and trade-offs made.</p>`
+    },
+    'sk-product-vision': {
+      icon: '⚡', title: 'product-vision', subtitle: 'Strategy · /product-vision',
+      body: `<p>Write a compelling, durable product vision statement. Not a goal or a metric — a picture of the future state the product is working toward. Used to align a team over 3-5 years.</p>
+        <div class="panel-tag">/product-vision</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Vision statement (1-3 sentences) + supporting narrative.</p>`
+    },
+    'sk-north-star-metric': {
+      icon: '⚡', title: 'north-star-metric', subtitle: 'Strategy · /north-star',
+      body: `<p>Identify the single metric that best captures the value the product delivers to customers — and predicts business outcomes. Avoids vanity metrics and lag indicators. Produces input metrics that drive the north star.</p>
+        <div class="panel-tag">/north-star</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> North star definition + metric tree (inputs → north star → business outcomes).</p>`
+    },
+    'sk-opportunity-solution-tree': {
+      icon: '⚡', title: 'opportunity-solution-tree', subtitle: 'Strategy',
+      body: `<p>Teresa Torres's OST framework. Links a desired outcome → opportunities (unmet user needs) → solutions → experiments. Prevents jumping to solutions before understanding the opportunity space.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Visual tree structure (text representation) from outcome to testable experiments.</p>`
+    },
+    'sk-outcome-roadmap': {
+      icon: '⚡', title: 'outcome-roadmap', subtitle: 'Strategy · /transform-roadmap',
+      body: `<p>Convert a feature-based roadmap into an outcome-based one. Each item becomes a problem to solve or outcome to achieve, not a feature to build. Gives engineering and design room to find better solutions.</p>
+        <div class="panel-tag">/transform-roadmap</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Reformatted roadmap with outcome framing, success metric per item, and confidence level.</p>`
+    },
+    'sk-prioritize-features': {
+      icon: '⚡', title: 'prioritize-features', subtitle: 'Strategy · /prioritize-features',
+      body: `<p>Score and rank a list of features or initiatives. Applies a structured framework (RICE, ICE, or custom) to make prioritization explicit and defensible rather than gut-driven.</p>
+        <div class="panel-tag">/prioritize-features</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Scored ranking table with framework used, scores, and top recommendation.</p>`
+    },
+    'sk-prioritize-assumptions': {
+      icon: '⚡', title: 'prioritize-assumptions', subtitle: 'Strategy',
+      body: `<p>Rank a set of assumptions by two dimensions: importance to success and current level of uncertainty. Tells you which assumptions to test first before committing resources.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> 2x2 matrix placement + ordered list of what to validate and how.</p>`
+    },
+    'sk-prioritization-frameworks': {
+      icon: '⚡', title: 'prioritization-frameworks', subtitle: 'Strategy · /prioritize-features',
+      body: `<p>A toolkit of prioritization approaches: RICE, ICE, MoSCoW, Kano, Value vs Effort, and more. Use when you need to pick the right framework for a given decision type.</p>
+        <div class="panel-tag">/prioritize-features</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Framework recommendation + worked example applied to your specific list.</p>`
+    },
+    'sk-lean-canvas': {
+      icon: '⚡', title: 'lean-canvas', subtitle: 'Strategy · /lean-canvas',
+      body: `<p>Fill out a Lean Canvas for a product or idea. Nine blocks: Problem, Solution, Key Metrics, Unique Value Proposition, Unfair Advantage, Channels, Customer Segments, Cost Structure, Revenue Streams.</p>
+        <div class="panel-tag">/lean-canvas</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Completed Lean Canvas with honest gaps flagged.</p>`
+    },
+    'sk-startup-canvas': {
+      icon: '⚡', title: 'startup-canvas', subtitle: 'Strategy · /startup-canvas',
+      body: `<p>Business Model Canvas variant for startups. Similar to the Lean Canvas but with more emphasis on key partners, activities, and resources. Useful for framing a new venture or product area as if it were its own business.</p>
+        <div class="panel-tag">/startup-canvas</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Filled canvas with commentary on the riskiest blocks.</p>`
+    },
+    'sk-business-model': {
+      icon: '⚡', title: 'business-model', subtitle: 'Strategy · /business-model',
+      body: `<p>Map how the product creates value for users and captures value for the business. Covers value creation, delivery mechanism, revenue model, and cost structure. Useful for new features that introduce a new monetization layer.</p>
+        <div class="panel-tag">/business-model</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Business model narrative + key levers for growth and defensibility.</p>`
+    },
+    'sk-value-proposition': {
+      icon: '⚡', title: 'value-proposition', subtitle: 'Strategy · /value-proposition',
+      body: `<p>Define the core value proposition using the Value Proposition Canvas: what jobs customers are doing, what pains they experience, what gains they want, and how the product addresses each.</p>
+        <div class="panel-tag">/value-proposition</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Filled Value Proposition Canvas + a one-sentence VP statement.</p>`
+    },
+    'sk-value-prop-statements': {
+      icon: '⚡', title: 'value-prop-statements', subtitle: 'Strategy',
+      body: `<p>Generate multiple value proposition statement variations — for different audiences, channels, or levels of formality. Used for landing pages, pitch decks, or internal alignment.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> 3-5 VP statement variants with audience and channel notes.</p>`
+    },
+    'sk-monetization-strategy': {
+      icon: '⚡', title: 'monetization-strategy', subtitle: 'Strategy · /monetization-strategy',
+      body: `<p>Define how to charge for a product or feature. Explores monetization models (subscription, usage, transaction, freemium, marketplace) and recommends the best fit given user behavior and competitive context.</p>
+        <div class="panel-tag">/monetization-strategy</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Monetization model recommendation + revenue mechanics and risks.</p>`
+    },
+    'sk-pricing-strategy': {
+      icon: '⚡', title: 'pricing-strategy', subtitle: 'Strategy · /pricing',
+      body: `<p>Set pricing for a product, feature, or tier. Covers pricing psychology, anchoring, willingness-to-pay estimation, competitive benchmarking, and tier design. Outputs a recommended price or price range with rationale.</p>
+        <div class="panel-tag">/pricing</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Pricing recommendation with supporting logic and sensitivity analysis.</p>`
+    },
+
+    'sk-create-prd': {
+      icon: '⚡', title: 'create-prd', subtitle: 'Execution · /write-prd',
+      body: `<p>Write a full Product Requirements Document. Structured to cover: problem statement, target users, success metrics, user stories, scope (in/out), edge cases, open questions, and launch considerations. Follows Fasset's PRD format.</p>
+        <div class="panel-tag">/write-prd</div>
+        <div class="panel-divider"></div>
+        <p><strong>Before using:</strong> Load pm-execution/RULES.md.</p>
+        <p><strong>Output:</strong> Confluence-ready PRD with all sections populated.</p>`
+    },
+    'sk-user-stories': {
+      icon: '⚡', title: 'user-stories', subtitle: 'Execution · /write-stories',
+      body: `<p>Write user stories with acceptance criteria in the standard format: "As a [user], I want to [action], so that [benefit]." Each story includes Gherkin-style acceptance criteria and a definition of done.</p>
+        <div class="panel-tag">/write-stories</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Sprint-ready user stories, Jira-formatted, with ACs.</p>`
+    },
+    'sk-sprint-plan': {
+      icon: '⚡', title: 'sprint-plan', subtitle: 'Execution · /sprint',
+      body: `<p>Plan a sprint: select stories from the backlog, check capacity, set a sprint goal, and flag dependencies and risks. Outputs a sprint plan ready to share in planning.</p>
+        <div class="panel-tag">/sprint</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Sprint doc with goal, story list, capacity check, and risk flags.</p>`
+    },
+    'sk-pre-mortem': {
+      icon: '⚡', title: 'pre-mortem', subtitle: 'Execution · /pre-mortem',
+      body: `<p>Before launching a feature or making a big decision, imagine it has already failed. Work backwards to identify what went wrong and why. Surfaces risks that optimism bias hides in forward-looking planning.</p>
+        <div class="panel-tag">/pre-mortem</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Ranked failure modes with probability, impact, and mitigation actions.</p>`
+    },
+    'sk-wwas': {
+      icon: '⚡', title: 'wwas', subtitle: 'Execution · /retro',
+      body: `<p>What Went Well, What Went Wrong, Action Steps. A lightweight retrospective format. Faster than a full retro — useful for post-launch reviews, sprint check-ins, or incident reviews.</p>
+        <div class="panel-tag">/retro</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Three-section summary with clear action owners and dates.</p>`
+    },
+    'sk-retro': {
+      icon: '⚡', title: 'retro', subtitle: 'Execution · /retro',
+      body: `<p>Run a structured sprint retrospective. Covers: what went well, what didn't, and what to change. Produces actionable outcomes, not just venting. Includes a template for async retros.</p>
+        <div class="panel-tag">/retro</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Retro summary with voted action items and owners.</p>`
+    },
+    'sk-test-scenarios': {
+      icon: '⚡', title: 'test-scenarios', subtitle: 'Execution · /test-scenarios',
+      body: `<p>Write QA test scenarios for a feature. Covers happy paths, edge cases, error states, and regression risks. Written in plain language for QA engineers or for manual testing in review.</p>
+        <div class="panel-tag">/test-scenarios</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Test scenario table with precondition, steps, and expected result.</p>`
+    },
+    'sk-release-notes': {
+      icon: '⚡', title: 'release-notes', subtitle: 'Execution · /release-notes',
+      body: `<p>Write release notes for an app update or feature ship. User-facing language, no technical jargon. Formats for both App Store / Play Store character limits and internal Slack announcements.</p>
+        <div class="panel-tag">/release-notes</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Release notes in short (App Store) and long (internal) formats.</p>`
+    },
+    'sk-dummy-dataset': {
+      icon: '⚡', title: 'dummy-dataset', subtitle: 'Execution · /generate-data',
+      body: `<p>Generate synthetic datasets for testing, demos, or analytics prototyping. Define the schema (columns, types, distributions) and get back realistic-looking CSV or JSON data.</p>
+        <div class="panel-tag">/generate-data</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Synthetic dataset in the requested format and size.</p>`
+    },
+
+    'sk-competitor-analysis': {
+      icon: '⚡', title: 'competitor-analysis', subtitle: 'Research · /competitive-analysis',
+      body: `<p>Deep-dive analysis of one or more competitors. Covers product offering, pricing, target market, strengths, weaknesses, and strategic positioning. Surfaces gaps the product can exploit.</p>
+        <div class="panel-tag">/competitive-analysis</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Competitor profile(s) + comparative table + strategic implications.</p>`
+    },
+    'sk-competitive-battlecard': {
+      icon: '⚡', title: 'competitive-battlecard', subtitle: 'Research · /battlecard',
+      body: `<p>Build a sales and positioning battlecard versus a specific competitor. Covers: their pitch, our counter-pitch, where we win, where we lose, common objections and responses. Used by sales and for internal alignment.</p>
+        <div class="panel-tag">/battlecard</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> One-page battlecard formatted for quick reference.</p>`
+    },
+    'sk-market-segments': {
+      icon: '⚡', title: 'market-segments', subtitle: 'Research · /market-product',
+      body: `<p>Identify and describe the major segments in a market. Each segment gets: size estimate, defining characteristics, current solutions, and unmet needs. Used as input for beachhead selection and ICP definition.</p>
+        <div class="panel-tag">/market-product</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Segment map with attractiveness scoring.</p>`
+    },
+    'sk-market-sizing': {
+      icon: '⚡', title: 'market-sizing', subtitle: 'Research · /market-sizing',
+      body: `<p>TAM/SAM/SOM analysis for a product or market. Works top-down (industry reports) and bottom-up (unit economics) and reconciles both. Shows assumptions clearly so the numbers are auditable.</p>
+        <div class="panel-tag">/market-sizing</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> TAM/SAM/SOM table with sourced assumptions and methodology note.</p>`
+    },
+    'sk-swot-analysis': {
+      icon: '⚡', title: 'swot-analysis', subtitle: 'Research · /swot-analysis',
+      body: `<p>Strengths, Weaknesses, Opportunities, Threats. A structured internal + external audit of a product, team, or business. Most useful when taken seriously — forces honesty about weaknesses and real threats.</p>
+        <div class="panel-tag">/swot-analysis</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Four-quadrant SWOT with prioritized items and "so what" implications.</p>`
+    },
+    'sk-pestle-analysis': {
+      icon: '⚡', title: 'pestle-analysis', subtitle: 'Research',
+      body: `<p>Political, Economic, Social, Technological, Legal, Environmental scan of a market or industry. Useful for expansion into new geographies or regulated sectors like crypto/fintech.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> PESTLE table with key factors, impact rating, and implications per dimension.</p>`
+    },
+    'sk-porters-five-forces': {
+      icon: '⚡', title: 'porters-five-forces', subtitle: 'Research',
+      body: `<p>Porter's Five Forces competitive analysis: threat of new entrants, bargaining power of buyers, bargaining power of suppliers, threat of substitutes, and rivalry intensity. Useful for understanding industry attractiveness.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Five-forces assessment with force rating (high/medium/low) and strategic implications.</p>`
+    },
+    'sk-ansoff-matrix': {
+      icon: '⚡', title: 'ansoff-matrix', subtitle: 'Research',
+      body: `<p>Map growth options across four quadrants: Market Penetration (existing product, existing market), Market Development, Product Development, and Diversification. Clarifies which growth bets carry the most risk.</p>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Ansoff matrix with current position, growth options, and risk ranking.</p>`
+    },
+    'sk-analyze-feature-requests': {
+      icon: '⚡', title: 'analyze-feature-requests', subtitle: 'Research · /analyze-feedback',
+      body: `<p>Triage and categorize a pile of incoming feature requests. Groups by theme, identifies frequency, maps to user segments, and flags which requests are symptoms vs root causes.</p>
+        <div class="panel-tag">/analyze-feedback</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Categorized request log with theme frequency and PM recommendation per cluster.</p>`
+    },
+    'sk-sentiment-analysis': {
+      icon: '⚡', title: 'sentiment-analysis', subtitle: 'Research · /analyze-feedback',
+      body: `<p>Analyze sentiment in user reviews, Zendesk tickets, NPS responses, or any text feedback. Identifies positive themes, pain points, and emotional language. Useful for App Store review mining or support trend analysis.</p>
+        <div class="panel-tag">/analyze-feedback</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Sentiment breakdown with representative quotes and key themes.</p>`
+    },
+    'sk-stakeholder-map': {
+      icon: '⚡', title: 'stakeholder-map', subtitle: 'Research · /stakeholder-map',
+      body: `<p>Map stakeholders by influence, interest, and stance. Identifies who to keep informed, who to manage closely, and where resistance to a change is likely to come from.</p>
+        <div class="panel-tag">/stakeholder-map</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Stakeholder matrix with engagement strategy per quadrant.</p>`
+    },
+
+    'sk-metrics-dashboard': {
+      icon: '⚡', title: 'metrics-dashboard', subtitle: 'Analytics · /setup-metrics',
+      body: `<p>Design a metrics dashboard for a product or feature. Defines leading and lagging indicators, groups them into a hierarchy (input → north star → business), and specifies the data source for each metric.</p>
+        <div class="panel-tag">/setup-metrics</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Metric framework table ready to implement in Metabase or Mixpanel.</p>`
+    },
+    'sk-cohort-analysis': {
+      icon: '⚡', title: 'cohort-analysis', subtitle: 'Analytics · /analyze-cohorts',
+      body: `<p>Analyze user behavior by cohort (typically signup date or acquisition channel). Surfaces retention curves, activation drop-off by cohort, and how product changes have affected different user groups over time.</p>
+        <div class="panel-tag">/analyze-cohorts</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Cohort analysis with key findings and product implications.</p>`
+    },
+    'sk-ab-test-analysis': {
+      icon: '⚡', title: 'ab-test-analysis', subtitle: 'Analytics · /analyze-test',
+      body: `<p>Analyze the results of an A/B test. Checks statistical significance, effect size, and whether the test was run cleanly (no novelty effect, sufficient sample size). Gives a clear ship / don't ship recommendation.</p>
+        <div class="panel-tag">/analyze-test</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Test result summary with significance verdict, effect size, and recommendation.</p>`
+    },
+    'sk-sql-queries': {
+      icon: '⚡', title: 'sql-queries', subtitle: 'Analytics · /write-query',
+      body: `<p>Write SQL queries for product analytics — funnel analysis, retention, event counts, user segmentation. Optimized for Metabase or data warehouse contexts. Includes comments explaining the logic.</p>
+        <div class="panel-tag">/write-query</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Ready-to-run SQL with inline comments and parameter notes.</p>`
+    },
+    'sk-summarize-meeting': {
+      icon: '⚡', title: 'summarize-meeting', subtitle: 'Analytics · /meeting-notes',
+      body: `<p>Process a meeting transcript or raw notes into a structured summary: decisions made, action items with owners and dates, open questions, and key context. Filed in context/Meetings/ after processing.</p>
+        <div class="panel-tag">/meeting-notes</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Meeting summary doc with decisions, AIs, and questions clearly separated.</p>`
+    },
+
+    'sk-gtm-strategy': {
+      icon: '⚡', title: 'gtm-strategy', subtitle: 'GTM · /gtm-strategy',
+      body: `<p>Build a full go-to-market strategy for a feature launch or new product. Covers: target audience, positioning, channels, messaging, launch sequencing, and success metrics. Ends with a launch readiness checklist.</p>
+        <div class="panel-tag">/gtm-strategy</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> GTM strategy doc + launch checklist.</p>`
+    },
+    'sk-gtm-motions': {
+      icon: '⚡', title: 'gtm-motions', subtitle: 'GTM · /gtm-motions',
+      body: `<p>Define the distribution and sales motions for a product: product-led, sales-led, partner-led, or community-led. Identifies which motion fits best and what capabilities are needed to execute it.</p>
+        <div class="panel-tag">/gtm-motions</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Motion recommendation with rationale, required capabilities, and risks.</p>`
+    },
+    'sk-growth-loops': {
+      icon: '⚡', title: 'growth-loops', subtitle: 'GTM · /growth-strategy',
+      body: `<p>Identify compounding growth mechanisms in the product — loops where usage creates more usage. Examples: referral loops, content loops, network effects. Distinct from one-time acquisition campaigns.</p>
+        <div class="panel-tag">/growth-strategy</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Loop diagram (text) with input metrics, amplifiers, and how to instrument each loop.</p>`
+    },
+    'sk-marketing-ideas': {
+      icon: '⚡', title: 'marketing-ideas', subtitle: 'GTM · /marketing-ideas',
+      body: `<p>Generate marketing and campaign ideas for a product, feature, or audience segment. Spans paid, organic, content, partnerships, and community channels. Biased toward ideas that fit a lean budget and crypto/fintech context.</p>
+        <div class="panel-tag">/marketing-ideas</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Prioritized idea list with channel, effort, and expected leverage.</p>`
+    },
+    'sk-positioning-ideas': {
+      icon: '⚡', title: 'positioning-ideas', subtitle: 'GTM · /positioning-ideas',
+      body: `<p>Generate and evaluate product positioning angles. For each angle: the audience it works for, the core claim, how it differentiates from competitors, and the proof points needed to back it up.</p>
+        <div class="panel-tag">/positioning-ideas</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> 3-5 positioning options with trade-offs and a recommendation.</p>`
+    },
+    'sk-product-name': {
+      icon: '⚡', title: 'product-name', subtitle: 'GTM · /product-name',
+      body: `<p>Generate and evaluate product name options. Checks for: memorability, availability (domain/trademark signals), cultural fit across Fasset's key markets (UAE, Bahrain, Indonesia, Pakistan), and brand consistency.</p>
+        <div class="panel-tag">/product-name</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Scored name shortlist with rationale and flagged risks per name.</p>`
+    },
+
+    'sk-grammar-check': {
+      icon: '⚡', title: 'grammar-check', subtitle: 'Utility · /proofread',
+      body: `<p>Proofread and fix grammar, spelling, punctuation, and sentence clarity in any text. Does not change meaning or tone — only correctness. Flags any changes made.</p>
+        <div class="panel-tag">/proofread</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Corrected text with changes annotated.</p>`
+    },
+    'sk-review-resume': {
+      icon: '⚡', title: 'review-resume', subtitle: 'Utility · /review-resume',
+      body: `<p>Review and improve a CV/resume. Checks for impact clarity, quantification of achievements, ATS-friendliness, and formatting. Can also tailor the resume for a specific job description.</p>
+        <div class="panel-tag">/review-resume</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Annotated resume feedback + revised version if requested.</p>`
+    },
+    'sk-draft-nda': {
+      icon: '⚡', title: 'draft-nda', subtitle: 'Utility · /draft-nda',
+      body: `<p>Draft a Non-Disclosure Agreement. Covers mutual or one-way NDAs, term, scope of confidential information, and standard carve-outs. Note: always have legal review before signing.</p>
+        <div class="panel-tag">/draft-nda</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Draft NDA in plain language with standard clauses highlighted for legal review.</p>`
+    },
+    'sk-privacy-policy': {
+      icon: '⚡', title: 'privacy-policy', subtitle: 'Utility · /privacy-policy',
+      body: `<p>Draft a privacy policy for a product or feature. Covers data collected, how it's used, retention, third-party sharing, user rights, and jurisdiction-specific requirements (GDPR, UAE PDPL). Requires legal review.</p>
+        <div class="panel-tag">/privacy-policy</div>
+        <div class="panel-divider"></div>
+        <p><strong>Output:</strong> Draft privacy policy structured for web/app use.</p>`
+    },
+  };
+
+  // ── Panel logic ─────────────────────────────────────────────────────────────
+
+  let currentKey = null;
+
+  function openPanel(key) {
+    const d = data[key];
+    if (!d) return;
+
+    // Deactivate previous
+    if (currentKey) {
+      document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+    }
+
+    // Activate clicked element
+    currentKey = key;
+    event.currentTarget.classList.add('active');
+
+    // Fill panel
+    document.getElementById('panelIcon').textContent = d.icon;
+    document.getElementById('panelTitle').textContent = d.title;
+    document.getElementById('panelSubtitle').textContent = d.subtitle;
+    document.getElementById('panelBody').innerHTML = d.body;
+
+    // Open
+    document.getElementById('sidePanel').classList.add('open');
+    document.body.classList.add('panel-open');
+  }
+
+  function closePanel() {
+    document.getElementById('sidePanel').classList.remove('open');
+    document.body.classList.remove('panel-open');
+    if (currentKey) {
+      document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+      currentKey = null;
+    }
+  }
+
+  // Close on Escape
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
+
+</body>
+</html>
