@@ -15,7 +15,7 @@ Hamis Mahmood, Senior PM at Fasset (Shariah-compliant crypto super app, UAE/Bahr
 - `context/` — people, meetings + transcripts, initiatives, voice guide
 - `briefings/` — daily morning briefing files (one per day, auto-generated)
 - `Scheduled/` — automated task definitions (never modify in normal sessions)
-- `_system/` — agents, skills, tools (ignore in normal sessions)
+- `_system/` — skills, tools (ignore in normal sessions)
 
 ## Knowledge routing
 
@@ -31,9 +31,6 @@ Hamis Mahmood, Senior PM at Fasset (Shariah-compliant crypto super app, UAE/Bahr
 | Project-scoped work | `Projects/<name>/CLAUDE.md` + `Projects/<name>/MEMORY.md` |
 | Someone is mentioned | `context/People/<name>.md` |
 | New meeting transcript | `context/Meetings/transcript-protocol.md` |
-| Writing a PRD | use `_system/agents/spec-writer.md` |
-| Stakeholder comms | use `_system/agents/stakeholder-comms.md` |
-| Strategic framing | use `_system/agents/pm-strategist.md` |
 
 Session start: load `MEMORY.md` only. Then check `_system/setup.md` — if any required tool is not connected, surface the missing tool(s) before proceeding. Everything else loads on-demand.
 

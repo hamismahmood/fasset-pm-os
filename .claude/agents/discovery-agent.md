@@ -1,1 +1,0 @@
-../../_system/agents/discovery-agent.md
