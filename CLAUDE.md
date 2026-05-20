@@ -13,6 +13,7 @@ Hamis Mahmood, Senior PM at Fasset (Shariah-compliant crypto super app, UAE/Bahr
 - `pm-comms/` — Slack, email, stakeholder updates
 - `pm-data/` — analytics, Mixpanel, Metabase, metrics
 - `context/` — people, meetings + transcripts, initiatives, voice guide
+- `briefings/` — daily morning briefing files (one per day, auto-generated)
 - `Scheduled/` — automated task definitions (never modify in normal sessions)
 - `_system/` — agents, skills, tools (ignore in normal sessions)
 
