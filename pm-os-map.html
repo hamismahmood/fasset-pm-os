@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fasset PM OS — Map</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #1e2535;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    header p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .badge {
+      margin-left: auto;
+      font-size: 11px;
+      background: #1e2535;
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-full { grid-column: 1 / -1; }
+
+    /* Cards */
+    .card {
+      background: #161b27;
+      border: 1px solid #1e2535;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #1e2535;
+      background: #1a2035;
+    }
+
+    .card-header .icon {
+      font-size: 16px;
+    }
+
+    .card-header h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .card-header .count {
+      margin-left: auto;
+      font-size: 11px;
+      background: #0f1117;
+      color: #64748b;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .card-body { padding: 14px 18px; }
+
+    /* Folder tree */
+    .tree { list-style: none; }
+
+    .tree li {
+      padding: 5px 0;
+      font-size: 13px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border-bottom: 1px solid #1a2035;
+    }
+
+    .tree li:last-child { border-bottom: none; }
+
+    .tree .folder-icon { flex-shrink: 0; margin-top: 1px; }
+    .tree .folder-name { color: #a5b4fc; font-weight: 500; }
+    .tree .folder-desc { color: #64748b; font-size: 12px; margin-top: 2px; }
+    .tree .folder-status {
+      margin-left: auto;
+      flex-shrink: 0;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 8px;
+      white-space: nowrap;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    .status-critical { background: #3b0f0f; color: #f87171; }
+    .status-active    { background: #0d2b1f; color: #34d399; }
+    .status-deadline  { background: #2b1d0d; color: #fb923c; }
+    .status-research  { background: #0d1f2b; color: #60a5fa; }
+    .status-tracking  { background: #1f1b2b; color: #a78bfa; }
+
+    /* Radar items */
+    .radar-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #1a2035;
+      font-size: 13px;
+    }
+    .radar-item:last-child { border-bottom: none; }
+    .radar-item .name { color: #e2e8f0; font-weight: 500; flex: 1; }
+    .radar-item .role { color: #64748b; font-size: 12px; }
+
+    /* PM domains */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .domain-card {
+      background: #1a2035;
+      border: 1px solid #1e2535;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .domain-card .domain-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .domain-card .domain-desc {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background: #1a2035;
+      border: 1px solid #1e2535;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.15s, color 0.15s;
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      border-color: #6366f1;
+      color: #c7d2fe;
+    }
+
+    .skill-tag .skill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Skill category dots */
+    .cat-discovery  { background: #60a5fa; }
+    .cat-strategy   { background: #34d399; }
+    .cat-execution  { background: #f472b6; }
+    .cat-research   { background: #fb923c; }
+    .cat-analytics  { background: #a78bfa; }
+    .cat-gtm        { background: #fbbf24; }
+    .cat-utility    { background: #94a3b8; }
+
+    /* Skills legend */
+    .skills-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Context files */
+    .file-list { list-style: none; }
+    .file-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+      font-size: 13px;
+      border-bottom: 1px solid #1a2035;
+      color: #94a3b8;
+    }
+    .file-list li:last-child { border-bottom: none; }
+    .file-list .fname { color: #7dd3fc; font-family: monospace; font-size: 12px; }
+
+    /* Section label */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+
+    .section-label:first-child { margin-top: 0; }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+      .domain-grid { grid-template-columns: 1fr 1fr; }
+      .grid-full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">F</div>
+    <div>
+      <h1>Fasset PM OS</h1>
+      <p>iClaude — Hamis Mahmood · Senior PM · fasset.com</p>
+    </div>
+    <div class="badge">Last updated: 2026-05-20</div>
+  </header>
+
+  <div class="grid">
+
+    <!-- Projects -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">📁</span>
+        <h2>Projects/</h2>
+        <span class="count">8 projects</span>
+      </div>
+      <div class="card-body">
+        <ul class="tree">
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">Global_USD_Account/</div>
+              <div class="folder-desc">Banking IBAN — Keel, Due, money movement (from Tahir)</div>
+            </div>
+            <span class="folder-status status-critical">Critical</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">Travel_Rule/</div>
+              <div class="folder-desc">AML compliance, tiered verification</div>
+            </div>
+            <span class="folder-status status-deadline">Deadline May 22</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">Statement_of_Account/</div>
+              <div class="folder-desc">Downloadable/emailed account statements</div>
+            </div>
+            <span class="folder-status status-deadline">Deadline Jun 15</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">Global_Expansion/</div>
+              <div class="folder-desc">Country prioritization, marketing-led expansion</div>
+            </div>
+            <span class="folder-status status-active">Active</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">P2P_Multiple_Sellers/</div>
+              <div class="folder-desc">P2P Express marketplace — multi-seller, PKR→USDT</div>
+            </div>
+            <span class="folder-status status-active">PRD v1 done</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">COW/</div>
+              <div class="folder-desc">Customer Obsession Week — 100 user convos by May 25</div>
+            </div>
+            <span class="folder-status status-deadline">Ends May 25</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">Mastercard_Issuing/</div>
+              <div class="folder-desc">Strategic exploration: direct Mastercard relationship</div>
+            </div>
+            <span class="folder-status status-research">Research</span>
+          </li>
+          <li>
+            <span class="folder-icon">📂</span>
+            <div>
+              <div class="folder-name">Team_OS/</div>
+              <div class="folder-desc">Claude Code team OS for Fasset</div>
+            </div>
+            <span class="folder-status status-research">Research</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Radar -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">📡</span>
+        <h2>Radar/</h2>
+        <span class="count">5 items · monitored-not-owned</span>
+      </div>
+      <div class="card-body">
+        <div class="radar-item">
+          <span>📄</span>
+          <div>
+            <div class="name">Card_Strategy.md</div>
+            <div class="role">Cards product — Rafi's top priority · Supporting Arundathi</div>
+          </div>
+        </div>
+        <div class="radar-item">
+          <span>📄</span>
+          <div>
+            <div class="name">Zendesk_SDK.md</div>
+            <div class="role">Native SDK migration — PRD done, Sprint 12 planned · Tracking delivery</div>
+          </div>
+        </div>
+        <div class="radar-item">
+          <span>📄</span>
+          <div>
+            <div class="name">Business_Banking.md</div>
+            <div class="role">Titan pilot for 3 business clients · Light-touch owner</div>
+          </div>
+        </div>
+        <div class="radar-item">
+          <span>📄</span>
+          <div>
+            <div class="name">WorldPay_PSP.md</div>
+            <div class="role">WorldPay PSP onboarding · Country analysis for Nawaz</div>
+          </div>
+        </div>
+        <div class="radar-item">
+          <span>📄</span>
+          <div>
+            <div class="name">Fasset_4.5.md</div>
+            <div class="role">Major app redesign — design paused · Not directly involved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PM Domains -->
+    <div class="card grid-full">
+      <div class="card-header">
+        <span class="icon">🗂</span>
+        <h2>PM Domain Folders</h2>
+        <span class="count">6 domains · each has RULES.md + tasks.md</span>
+      </div>
+      <div class="card-body">
+        <div class="domain-grid">
+          <div class="domain-card">
+            <div class="domain-name">📝 pm-execution/</div>
+            <div class="domain-desc">PRDs, specs, stories, sprints. Load RULES.md before writing any spec.</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-name">🔍 pm-discovery/</div>
+            <div class="domain-desc">User research, interviews, call notes. Subdir: call-notes/</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-name">🤝 pm-partners/</div>
+            <div class="domain-desc">Vendor management, contracts, comms. Subdir: vendors/ (one file per vendor)</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-name">🗺 pm-strategy/</div>
+            <div class="domain-desc">Roadmap, prioritization, market research</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-name">💬 pm-comms/</div>
+            <div class="domain-desc">Slack, email, stakeholder updates. Always load HOW_I_WORK.md first.</div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-name">📊 pm-data/</div>
+            <div class="domain-desc">Analytics, Mixpanel, Metabase, metrics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">🧠</span>
+        <h2>context/</h2>
+        <span class="count">Standing knowledge base</span>
+      </div>
+      <div class="card-body">
+        <ul class="file-list">
+          <li><span>👤</span><span class="fname">People/</span><span>One file per person — load when someone is mentioned</span></li>
+          <li><span>📅</span><span class="fname">Meetings/</span><span>One file per recurring meeting + transcripts</span></li>
+          <li><span>🚀</span><span class="fname">Initiatives/</span><span>Cross-cutting initiatives</span></li>
+          <li><span>📋</span><span class="fname">Logs/</span><span>Activity logs</span></li>
+          <li><span>✍️</span><span class="fname">HOW_I_WORK.md</span><span>Voice/style guide — load for all writing</span></li>
+          <li><span>🏢</span><span class="fname">COMPANY_ONGOINGS.md</span><span>Current company context</span></li>
+          <li><span>📇</span><span class="fname">MEETINGS.md</span><span>Meeting index</span></li>
+          <li><span>👥</span><span class="fname">PEOPLE.md</span><span>People index</span></li>
+          <li><span>🗃</span><span class="fname">SCHEMA.md</span><span>OS schema and conventions</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- System files -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">⚙️</span>
+        <h2>System &amp; Config</h2>
+      </div>
+      <div class="card-body">
+        <ul class="file-list">
+          <li><span>📌</span><span class="fname">MEMORY.md</span><span>Master index — projects, tasks, vendors, context</span></li>
+          <li><span>📖</span><span class="fname">CLAUDE.md</span><span>OS-level behavioral rules for Claude</span></li>
+          <li><span>📚</span><span class="fname">README.md</span><span>Setup instructions and plugin overview</span></li>
+          <li><span>📝</span><span class="fname">session_log.md</span><span>Append-only session history</span></li>
+          <li><span>📅</span><span class="fname">briefings/</span><span>Auto-generated daily briefing files</span></li>
+          <li><span>🔁</span><span class="fname">Scheduled/</span><span>Automated task definitions — never modify manually</span></li>
+          <li><span>🛠</span><span class="fname">_system/</span><span>Agents, hooks, skills, tools — ignore in normal sessions</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="card grid-full">
+      <div class="card-header">
+        <span class="icon">⚡</span>
+        <h2>PM Skills</h2>
+        <span class="count">65 skills · ~/.claude/skills/</span>
+      </div>
+      <div class="card-body">
+        <div class="skills-legend">
+          <div class="legend-item"><div class="legend-dot cat-discovery"></div>Discovery</div>
+          <div class="legend-item"><div class="legend-dot cat-strategy"></div>Strategy</div>
+          <div class="legend-item"><div class="legend-dot cat-execution"></div>Execution</div>
+          <div class="legend-item"><div class="legend-dot cat-research"></div>Research</div>
+          <div class="legend-item"><div class="legend-dot cat-analytics"></div>Analytics</div>
+          <div class="legend-item"><div class="legend-dot cat-gtm"></div>GTM</div>
+          <div class="legend-item"><div class="legend-dot cat-utility"></div>Utility</div>
+        </div>
+
+        <div class="section-label">Discovery</div>
+        <div class="skills-grid" style="margin-bottom:16px">
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>brainstorm-ideas-new</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>brainstorm-ideas-existing</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>brainstorm-experiments-new</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>brainstorm-experiments-existing</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>brainstorm-okrs</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>identify-assumptions-new</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>identify-assumptions-existing</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>interview-script</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>summarize-interview</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>job-stories</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>user-personas</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>user-segmentation</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>ideal-customer-profile</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>beachhead-segment</div>
+          <div class="skill-tag"><div class="skill-dot cat-discovery"></div>customer-journey-map</div>
+        </div>
+
+        <div class="section-label">Strategy</div>
+        <div class="skills-grid" style="margin-bottom:16px">
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>product-strategy</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>product-vision</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>north-star-metric</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>opportunity-solution-tree</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>outcome-roadmap</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>prioritize-features</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>prioritize-assumptions</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>prioritization-frameworks</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>lean-canvas</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>startup-canvas</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>business-model</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>value-proposition</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>value-prop-statements</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>monetization-strategy</div>
+          <div class="skill-tag"><div class="skill-dot cat-strategy"></div>pricing-strategy</div>
+        </div>
+
+        <div class="section-label">Execution</div>
+        <div class="skills-grid" style="margin-bottom:16px">
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>create-prd</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>user-stories</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>sprint-plan</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>pre-mortem</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>wwas</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>retro</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>test-scenarios</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>release-notes</div>
+          <div class="skill-tag"><div class="skill-dot cat-execution"></div>dummy-dataset</div>
+        </div>
+
+        <div class="section-label">Research</div>
+        <div class="skills-grid" style="margin-bottom:16px">
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>competitor-analysis</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>competitive-battlecard</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>market-segments</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>market-sizing</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>swot-analysis</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>pestle-analysis</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>porters-five-forces</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>ansoff-matrix</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>analyze-feature-requests</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>sentiment-analysis</div>
+          <div class="skill-tag"><div class="skill-dot cat-research"></div>stakeholder-map</div>
+        </div>
+
+        <div class="section-label">Analytics</div>
+        <div class="skills-grid" style="margin-bottom:16px">
+          <div class="skill-tag"><div class="skill-dot cat-analytics"></div>metrics-dashboard</div>
+          <div class="skill-tag"><div class="skill-dot cat-analytics"></div>cohort-analysis</div>
+          <div class="skill-tag"><div class="skill-dot cat-analytics"></div>ab-test-analysis</div>
+          <div class="skill-tag"><div class="skill-dot cat-analytics"></div>sql-queries</div>
+          <div class="skill-tag"><div class="skill-dot cat-analytics"></div>summarize-meeting</div>
+        </div>
+
+        <div class="section-label">GTM</div>
+        <div class="skills-grid" style="margin-bottom:16px">
+          <div class="skill-tag"><div class="skill-dot cat-gtm"></div>gtm-strategy</div>
+          <div class="skill-tag"><div class="skill-dot cat-gtm"></div>gtm-motions</div>
+          <div class="skill-tag"><div class="skill-dot cat-gtm"></div>growth-loops</div>
+          <div class="skill-tag"><div class="skill-dot cat-gtm"></div>marketing-ideas</div>
+          <div class="skill-tag"><div class="skill-dot cat-gtm"></div>positioning-ideas</div>
+          <div class="skill-tag"><div class="skill-dot cat-gtm"></div>product-name</div>
+        </div>
+
+        <div class="section-label">Utility</div>
+        <div class="skills-grid">
+          <div class="skill-tag"><div class="skill-dot cat-utility"></div>grammar-check</div>
+          <div class="skill-tag"><div class="skill-dot cat-utility"></div>review-resume</div>
+          <div class="skill-tag"><div class="skill-dot cat-utility"></div>draft-nda</div>
+          <div class="skill-tag"><div class="skill-dot cat-utility"></div>privacy-policy</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <p style="text-align:center; font-size:11px; color:#334155; margin-top:32px;">
+    Fasset PM OS · iClaude · 2026-05-20
+  </p>
+
+</div>
+</body>
+</html>
