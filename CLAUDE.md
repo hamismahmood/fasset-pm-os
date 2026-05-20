@@ -32,35 +32,20 @@ Hamis Mahmood, Senior PM at Fasset (Shariah-compliant crypto super app, UAE/Bahr
 | Someone is mentioned | `context/People/<name>.md` |
 | New meeting transcript | `context/Meetings/transcript-protocol.md` |
 
-## Installed plugins
+## Skills and commands
 
-All project-scoped. Marketplace: `claude-plugins-official` (default) + `phuryn/pm-skills` (GitHub).
+65 PM skills live in `.claude/skills/` (auto-loaded when relevant). 36 slash commands live in `.claude/commands/` (user-triggered). Full reference: `README.md`.
 
-### PM Skills (`phuryn/pm-skills`)
+Key commands by stage:
+- **Discovery:** `/discover` `/brainstorm` `/interview` `/triage-requests` `/setup-metrics`
+- **Strategy:** `/strategy` `/market-scan` `/value-proposition` `/business-model` `/pricing`
+- **Execution:** `/write-prd` `/write-stories` `/plan-okrs` `/sprint` `/pre-mortem` `/transform-roadmap`
+- **Research:** `/competitive-analysis` `/analyze-feedback`
+- **Analytics:** `/analyze-test` `/analyze-cohorts` `/write-query`
+- **GTM:** `/plan-launch` `/growth-strategy` `/battlecard` `/north-star`
+- **Utility:** `/meeting-notes` `/proofread` `/draft-nda`
 
-| Plugin | Key commands | Use for |
-| :--- | :--- | :--- |
-| `pm-product-discovery` | `/discover`, `/interview`, `/triage-requests`, `/setup-metrics` | Ideation, assumption testing, interview synthesis, feature prioritization |
-| `pm-product-strategy` | `/strategy`, `/business-model`, `/value-proposition`, `/pricing`, `/market-scan` | Vision, strategy canvas, lean canvas, SWOT, Porter's, Ansoff, monetization |
-| `pm-execution` | `/write-prd`, `/write-stories`, `/sprint`, `/plan-okrs`, `/pre-mortem`, `/transform-roadmap` | PRDs, OKRs, roadmaps, user stories, sprints, retros |
-| `pm-market-research` | — | Personas, segmentation, competitive analysis, sentiment analysis |
-| `pm-data-analytics` | — | SQL generation, cohort analysis, A/B test analysis |
-| `pm-go-to-market` | `/plan-launch`, `/growth-strategy`, `/battlecard` | GTM strategy, growth loops, ICP, beachhead segments |
-| `pm-marketing-growth` | — | North Star metric, positioning, product naming, value prop statements |
-| `pm-toolkit` | — | Grammar check, NDA drafting, privacy policy, resume review |
-
-### Official plugins (`claude-plugins-official`)
-
-| Plugin | Use for |
-| :--- | :--- |
-| `atlassian` | Jira issue creation/search/transitions, Confluence pages — use for all ticket work |
-| `figma` | Read/write Figma designs, design-to-code, component inspection |
-| `github` | PR reviews, issue management, repo operations |
-| `superpowers` | Meta-skills: parallel agents, git worktrees, TDD, brainstorming, plans |
-| `frontend-design` | UI component building, layout, production-quality frontend |
-| `supabase` | Database queries, schema management, Supabase MCP |
-| `claude-md-management` | Update and improve CLAUDE.md files |
-| `skill-creator` | Create new custom skills |
+Tool plugins (Jira, Figma, GitHub, Supabase) load automatically via `claude-plugins-official`.
 
 Session start: load `MEMORY.md` only. Then check `_system/setup.md` — if any required tool is not connected, surface the missing tool(s) before proceeding. Everything else loads on-demand.
 
