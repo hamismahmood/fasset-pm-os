@@ -1,1 +1,1 @@
-../../00_agents/pm-strategist.md
+../../_system/agents/pm-strategist.md

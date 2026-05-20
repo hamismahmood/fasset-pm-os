@@ -1,1 +1,1 @@
-../../00_agents/devils-advocate.md
+../../_system/agents/devils-advocate.md

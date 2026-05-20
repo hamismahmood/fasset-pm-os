@@ -1,1 +1,1 @@
-../../00_agents/discovery-agent.md
+../../_system/agents/discovery-agent.md

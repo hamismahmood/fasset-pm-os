@@ -1,1 +1,1 @@
-../../00_agents/spec-writer.md
+../../_system/agents/spec-writer.md

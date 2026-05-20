@@ -135,7 +135,7 @@ Tech: **Own** — Ethereum L2 on Arbitrum for settling regulated RWAs on-chain. 
 
 ## Key Vendors & Partners
 
-Source of truth: one file per vendor in `00_Resources/Vendors/`. Index: `00_Resources/VENDORS.md`.
+Source of truth: one file per vendor in `pm-partners/vendors/`.
 
 | Vendor | Relationship | Status |
 | :---- | :---- | :---- |
@@ -156,7 +156,7 @@ Source of truth: one file per vendor in `00_Resources/Vendors/`. Index: `00_Reso
 
 ## Recurring Meetings & Cadence
 
-Source of truth: one file per meeting in `00_Resources/Meetings/`. Index: `00_Resources/MEETINGS.md`.
+Source of truth: one file per meeting in `context/Meetings/`. Index: `context/MEETINGS.md`.
 
 | Meeting | Cadence | Time | Organizer | Status |
 | :---- | :---- | :---- | :---- | :---- |
