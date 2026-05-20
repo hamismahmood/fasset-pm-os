@@ -1,0 +1,1 @@
+/Users/hamis.mahmood/.claude/hooks/session-end.sh

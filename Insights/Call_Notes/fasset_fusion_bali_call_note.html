@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Call Note: Fasset Fusion (Bali) — Mandatory Briefing</title>
+  <style>
+    @page { size: A4; margin: 0; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 210mm;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: #fff;
+    }
+
+    .page {
+      width: 210mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #0f172a;
+      color: #fff;
+      padding: 22px 28px 18px;
+    }
+
+    .header .label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 5px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .meta-item .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #38bdf8;
+      flex-shrink: 0;
+    }
+
+    /* Body */
+    .body {
+      padding: 20px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    p, .body-text {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #374151;
+    }
+
+    /* Two-column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* Journey phases */
+    .phase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phase-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 11.5px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .phase-badge {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .phase-badge.see    { background: #dbeafe; color: #1e40af; }
+    .phase-badge.build  { background: #dcfce7; color: #15803d; }
+    .phase-badge.belong { background: #fef3c7; color: #92400e; }
+    .phase-badge.commit { background: #ede9fe; color: #5b21b6; }
+
+    /* Highlight box */
+    .highlight-box {
+      background: #f0f9ff;
+      border-left: 3px solid #0ea5e9;
+      padding: 10px 12px;
+      margin-top: 8px;
+    }
+
+    .highlight-box .stat {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0369a1;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .highlight-box .stat-label {
+      font-size: 11px;
+      color: #0c4a6e;
+      line-height: 1.4;
+    }
+
+    /* Action items */
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .checkbox {
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #94a3b8;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .owner-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: #f1f5f9;
+      color: #475569;
+      flex-shrink: 0;
+    }
+
+    /* Info card */
+    .info-card {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+    }
+
+    .info-card .card-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .info-card .card-body {
+      font-size: 11.5px;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+
+    /* Attendees */
+    .attendee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px 10px;
+      font-size: 11px;
+      color: #4b5563;
+    }
+
+    /* Footer */
+    .footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 10px 28px;
+      font-size: 10px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="label">Internal Team Briefing</div>
+    <h1>Fasset Fusion — Bali Offsite</h1>
+    <div class="meta">
+      <div class="meta-item"><span class="dot"></span>18 May 2026</div>
+      <div class="meta-item"><span class="dot"></span>~11 minutes</div>
+      <div class="meta-item"><span class="dot"></span>Called by: Saad Pall</div>
+      <div class="meta-item"><span class="dot"></span>23 attendees</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- Purpose + Retreat Scale -->
+    <div class="two-col">
+
+      <div>
+        <div class="section-title">Purpose of This Call</div>
+        <p>Saad called this to give future leaders more visibility into Fasset Fusion planning — a direct response to pulse survey feedback requesting more top-down communication. The 27 people on this call are expected to co-own the retreat's success alongside leadership.</p>
+      </div>
+
+      <div>
+        <div class="section-title">Retreat at a Glance</div>
+        <p>5-day company offsite (extended from 4) in Bali. One leadership team member owns each day. Pre-alignment day for future leaders runs the day before the full team arrives.</p>
+        <div class="highlight-box">
+          <div class="stat">130+</div>
+          <div class="stat-label">People attending Fasset Fusion — the largest offsite Fasset has done</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Four parts of the journey -->
+    <div>
+      <div class="section-title">The Four-Part Journey Framework</div>
+      <div class="phase-list">
+        <div class="phase-item">
+          <span class="phase-badge see">I See</span>
+          Leadership shares the long-term vision and company ambition. Top-down, directional.
+        </div>
+        <div class="phase-item">
+          <span class="phase-badge build">I Build</span>
+          The team figures out how to get to that vision. Cross-functional, bottom-up contribution.
+        </div>
+        <div class="phase-item">
+          <span class="phase-badge belong">I Belong</span>
+          Team building day run by the travel ERG. Focus on connection and belonging within the company.
+        </div>
+        <div class="phase-item">
+          <span class="phase-badge commit">I Commit</span>
+          Final day. Everyone commits to the shared vision, mission, and how to get there.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pre-alignment day + Logistics -->
+    <div class="two-col">
+
+      <div>
+        <div class="section-title">Pre-Alignment Day — Tuesday, 2 June</div>
+        <p style="margin-bottom: 8px;">Everyone on this call arrives one day early to spend Tuesday with the leadership team before the full retreat kicks off Wednesday.</p>
+        <div class="info-card">
+          <div class="card-title">What's on the agenda</div>
+          <div class="card-body">
+            - Glimpse into retreat sessions and key conversations<br>
+            - Q&amp;A with leadership before the full-team format<br>
+            - Learning &amp; development / training<br>
+            - Briefed to cascade vision and answer team questions during the retreat
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Flight &amp; Logistics</div>
+        <p style="margin-bottom: 8px;">People's team will share the full logistics package (ticket + visa + hotel) together once visas clear — expected by end of this week.</p>
+        <div class="info-card">
+          <div class="card-title">Known flight details</div>
+          <div class="card-body">
+            Timing was announced in the office weekly group. Departure: Monday 3 AM. Arrives Bali: Monday ~4 PM.<br><br>
+            For this group: take the same flight one day earlier (Sunday instead of Monday). Arrive Bali Sunday evening / Monday morning ahead of the pre-alignment day.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action items -->
+    <div>
+      <div class="section-title">Action Items</div>
+      <div class="action-list">
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span class="owner-tag">Hamis</span>
+          Check office weekly group for the previously announced flight timings (Afifa's message).
+        </div>
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span class="owner-tag">People's Team</span>
+          Share full logistics bundle (ticket, visa, hotel) by end of this week once visas are confirmed.
+        </div>
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span class="owner-tag">All on call</span>
+          Preparation details to follow. Follow-up call expected before the retreat.
+        </div>
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span class="owner-tag">All on call</span>
+          Arrive Bali by Monday 2 June. Be ready for pre-alignment day with leadership on Tuesday 3 June.
+        </div>
+      </div>
+    </div>
+
+    <!-- Attendees -->
+    <div>
+      <div class="section-title">Attendees</div>
+      <div class="attendee-grid">
+        <span>Arundathi Belur</span>
+        <span>Asif Taposh</span>
+        <span>Hamis Mahmood</span>
+        <span>Malik Danish</span>
+        <span>Mohamed Nawaz Kader Sulthan</span>
+        <span>Nurul Afiqah</span>
+        <span>Rafiza Ghazali</span>
+        <span>Saad Pall</span>
+        <span>Siddique Afridi</span>
+        <span>Syed Nashit Mohammad</span>
+        <span>William Mochia</span>
+        <span>Zainab Aahad</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Fasset Fusion — Mandatory Briefing Call</span>
+    <span>18 May 2026 &nbsp;|&nbsp; Notes by Hamis Mahmood</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Call Note: IBAN Standup — 18 May 2026</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 210mm;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: #fff;
+    }
+
+    .page {
+      width: 210mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #0f172a;
+      color: #fff;
+      padding: 22px 28px 18px;
+    }
+
+    .header .label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 5px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .meta-item .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #38bdf8;
+      flex-shrink: 0;
+    }
+
+    /* Body */
+    .body {
+      padding: 20px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .section-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    p, .body-text {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #374151;
+    }
+
+    /* Topic cards */
+    .topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .topic-card {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .topic-card.highlight {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .topic-card .number {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .topic-card.highlight .number {
+      background: #1d4ed8;
+    }
+
+    .topic-card .title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .topic-card .desc {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #4b5563;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .tag.eng   { background: #dcfce7; color: #166534; }
+    .tag.ux    { background: #fef3c7; color: #92400e; }
+    .tag.open  { background: #fce7f3; color: #9d174d; }
+    .tag.salman { background: #ede9fe; color: #5b21b6; }
+
+    /* Actions */
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    .checkbox {
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #94a3b8;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .action-owner {
+      font-size: 9px;
+      font-weight: 700;
+      color: #6366f1;
+      margin-left: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Warning box */
+    .warn-box {
+      background: #fefce8;
+      border-left: 3px solid #eab308;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      color: #713f12;
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    .footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 10px 28px;
+      font-size: 10px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="label">Internal Standup — Call Note</div>
+    <h1>IBAN Standup</h1>
+    <div class="meta">
+      <div class="meta-item"><span class="dot"></span>18 May 2026, 12:00 PKT</div>
+      <div class="meta-item"><span class="dot"></span>24 minutes</div>
+      <div class="meta-item"><span class="dot"></span>Areeb · Fazal · Hamis · Saqlain · Zain · Salman · Taha</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- Context + transcript note -->
+    <div class="two-col">
+
+      <div>
+        <div class="section-title">Focus</div>
+        <p>Sprint 10 progress on the IBAN / Global Payout scope. Bangladesh payout build, country-specific field requirements, Slack alert release approach, new fees endpoint backward compatibility, and the IBAN v2 cash wallet consolidation UX question raised by Salman.</p>
+      </div>
+
+      <div>
+        <div class="section-title">Transcript Note</div>
+        <div class="warn-box">
+          Tactiq dropped from <strong>01:07 to 12:47</strong> — approximately 11 minutes of discussion is missing from the record. The captured portion starts mid-conversation. Notes below cover only what was recorded.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Topics -->
+    <div>
+      <div class="section-title">Topics Discussed</div>
+      <div class="topic-list">
+
+        <div class="topic-card">
+          <div class="number">1</div>
+          <div>
+            <div class="title">Bangladesh Payout Build <span class="tag eng">Eng</span></div>
+            <div class="desc">Old BD payout build is too stale — Saqlain to do a full rebuild before testing. Zain set the target: build for BD + PKR out by Wednesday EOD so Bangladeshi partners can test by Friday. We have Bangladeshi staff internally for a first-pass. Saqlain to also pick up billing service fixes from Hena in the same pass.</div>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="number">2</div>
+          <div>
+            <div class="title">Country-Specific Payment Fields <span class="tag eng">Eng</span></div>
+            <div class="desc">A document with required fields per country was prepared and shared with Salman and Areeb. BD is similar to PKR. India requires IFSC code. Kenya is M-Pesa only — no bank account field. Areeb to verify his implementation against the doc; call Fazal directly if any field is unclear. Fazal to enable all supported currencies on dev so Areeb can test each country's field set.</div>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="number">3</div>
+          <div>
+            <div class="title">Slack Alert — Non-USD IBAN Deposits (HOR-670) <span class="tag eng">Eng</span></div>
+            <div class="desc">Merged to dev. Decision: no cherry-pick to prod — will ship with the next Keel code release. Volume is low (2-3 Euro transactions per month) so urgency is low. Fazal to update the ENV on both dev and prod. Alert should only fire in production: add an environment check in the notification function — if dev, return early. Hamis, Zain, and Taha have all been added to the Keel Slack alert channel.</div>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="number">4</div>
+          <div>
+            <div class="title">New Fees GET Endpoint — Backward Compatibility <span class="tag eng">Eng</span></div>
+            <div class="desc">New GET endpoint for the fees screen — no payload from frontend, just a call and a response. Backward compat approach: leave the old IBAN info endpoint untouched for now. New build integrates the new endpoint. Old builds won't see tier-based fees, which is fine — it's a UI change and old users just need to update. After 1-2 releases, strip fees info out of the old endpoint. Zain to share the endpoint details with Areeb.</div>
+          </div>
+        </div>
+
+        <div class="topic-card highlight">
+          <div class="number">5</div>
+          <div>
+            <div class="title">IBAN v2 — Cash Wallet Consolidation UX <span class="tag salman">Salman</span> <span class="tag open">Open</span></div>
+            <div class="desc">
+              <strong>Taha flagged:</strong> When IBAN v2 launches, users who had $1,000 in their cash wallet and $1,000 in their IBAN separately will see both surfaces show $2,000. Risk of confusion — it'll look like a duplication.<br><br>
+              <strong>Salman's question:</strong> What's needed to kill the cash wallet altogether? Could it be renamed — "USD balance" or "USD account" — to reduce confusion when users buy stocks or move funds?<br><br>
+              <strong>Salman's note:</strong> In Fasset 4.5, the money is already displayed in the USD account form — is that already live?<br><br>
+              <strong>Taha's redirect:</strong> Align with Siddique on the UX approach — whether to rename, remove, or communicate the change to users proactively. No decision reached in this call.
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="number">6</div>
+          <div>
+            <div class="title">Transaction Download <span class="tag eng">Eng</span></div>
+            <div class="desc">Areeb confirmed the requirements are clear. Will be included in this build. Saqlain also to be looped in on implementation.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div>
+      <div class="section-title">Actions</div>
+      <div class="action-list">
+
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span><strong>Saqlain:</strong> Rebuild BD payout, include billing service fixes from Hena, target build by Wednesday EOD.<span class="action-owner">Saqlain</span></span>
+        </div>
+
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span><strong>Fazal:</strong> Enable all supported currencies on dev ENV; whitelist Areeb's customer ID on dev.<span class="action-owner">Fazal</span></span>
+        </div>
+
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span><strong>Fazal:</strong> Update Keel Slack alert ENV on dev and prod; add environment check so alerts skip in dev.<span class="action-owner">Fazal</span></span>
+        </div>
+
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span><strong>Zain:</strong> Share new fees GET endpoint details with Areeb.<span class="action-owner">Zain</span></span>
+        </div>
+
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span><strong>Areeb:</strong> Integrate new fees endpoint in this build; include transaction download; verify country fields and call Fazal if unclear.<span class="action-owner">Areeb</span></span>
+        </div>
+
+        <div class="action-item">
+          <div class="checkbox"></div>
+          <span><strong>Salman + Taha:</strong> Align with Siddique on cash wallet UX for IBAN v2 launch — rename, hide, or user communication? Decision needed before the build ships.<span class="action-owner">Salman · Taha</span></span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>IBAN Standup — 18 May 2026</span>
+    <span>iClaude / Insights / Call Notes</span>
+  </div>
+
+</div>
+</body>
+</html>
