@@ -5,8 +5,8 @@ email: noman.hassan@fasset.com
 slack_id: ~unknown
 role: Software Engineer
 team: Engineering
-status: onboarding
-last_verified: 2026-05-15
+status: active
+last_verified: 2026-05-21
 aliases: [Noman]
 tags: [ai-enablement, customer-discovery]
 source: Granola transcript 2026-05-15

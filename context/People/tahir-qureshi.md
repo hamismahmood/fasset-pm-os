@@ -7,7 +7,7 @@ role: PM, Banking IBAN
 team: Product Managers
 status: departed
 last_day: 2026-05-05
-last_verified: 2026-05-04
+last_verified: 2026-05-21
 aliases: [Tahir, TQ]
 tags: [departed, kt-completed, iban-handover]
 ---

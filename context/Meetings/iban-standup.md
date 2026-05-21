@@ -5,9 +5,9 @@ cadence: daily
 time: 12:00 PKT
 duration_minutes: 30
 organizer: Taha Farooq
-attendees: [Taha Farooq, Muhammad Zain, Adnan Khan, Faseeh Abdullah, Muhammad Tayyab, Hamis Mahmood, Tahir Qureshi (departing), Muhammad Saqlain, Ubaid Rajput, Fazal Erabbi, Muhammad Irfan, Areeb Siddiqui, Salman Khan]
+attendees: [Taha Farooq, Muhammad Zain, Adnan Khan, Faseeh Abdullah, Muhammad Tayyab, Hamis Mahmood, Muhammad Saqlain, Ubaid Rajput, Fazal Erabbi, Muhammad Irfan, Areeb Siddiqui, Salman Khan]
 status: active
-last_verified: 2026-05-04
+last_verified: 2026-05-21
 tags: [iban, eng-sync, daily]
 ---
 

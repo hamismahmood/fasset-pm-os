@@ -7,7 +7,7 @@ role: Head of Product
 team: Leadership
 status: departed
 last_day: 2026-05-14
-last_verified: 2026-05-14
+last_verified: 2026-05-21
 aliases: [Ibrahim, Ibrahim Hasani]
 tags: [departing, kt-owed, head-of-product]
 ---

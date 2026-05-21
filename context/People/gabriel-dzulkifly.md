@@ -3,8 +3,8 @@ type: person
 name: Gabriel Dzulkifly
 role: PM (likely Indonesia-focused)
 team: Product Managers
-status: onboarding
-last_verified: 2026-05-04
+status: active
+last_verified: 2026-05-21
 joined: 2026-04-10
 tags: [indonesia, new-hire]
 ---

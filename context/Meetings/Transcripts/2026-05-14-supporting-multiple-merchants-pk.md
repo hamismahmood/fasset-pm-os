@@ -1,10 +1,10 @@
 ---
-type: meeting
+type: transcript
 name: Supporting Multiple Merchants in PK
-date: 2026-05-14
-time: "11:30 PKT"
+meeting_date: 2026-05-14
 attendees: [Hamis Mahmood, Malik Danish]
-related: [Global_Expansion, due, malik-danish]
+related_project: P2P_Multiple_Sellers
+status: active-followups
 tags: [pakistan, merchant, marketplace, due]
 last_verified: 2026-05-14
 ---

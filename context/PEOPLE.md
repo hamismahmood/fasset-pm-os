@@ -1,8 +1,8 @@
 # PEOPLE.md (Index)
-*Derived index. Source of truth = individual files in `00_Resources/People/`. See `00_Resources/SCHEMA.md` for conventions.*
-*Last regenerated: 2026-05-08*
+*Derived index. Source of truth = individual files in `context/People/`. See `context/SCHEMA.md` for conventions.*
+*Last regenerated: 2026-05-21*
 
-This is a fast-scan index. To update a person's info, edit their file in `People/` directly — never edit this index by hand to add facts. Cowork can regenerate this from the source files.
+This is a fast-scan index. To update a person's info, edit their file in `People/` directly — never edit this index by hand to add facts.
 
 ## Leadership
 
@@ -11,7 +11,7 @@ This is a fast-scan index. To update a person's info, edit their file in `People
 | Mohammad Raafi Hossain | CEO | active | [mohammad-raafi-hossain.md](People/mohammad-raafi-hossain.md) |
 | Daniel | COO | active | [daniel.md](People/daniel.md) |
 | Saad Pall | Chief Growth Officer (SVP Marketing + UAE Country Head) | active | [saad-pall.md](People/saad-pall.md) |
-| Ibrahim Ali | Head of Product | departing (last day 2026-05-14) | [ibrahim-ali.md](People/ibrahim-ali.md) |
+| Ibrahim Ali | Head of Product | departed (2026-05-14) | [ibrahim-ali.md](People/ibrahim-ali.md) |
 | Zane Motiwala | Head of Data & AI, Interim Head of Product | active | [zane-motiwala.md](People/zane-motiwala.md) |
 | Rafiza Ghazali | Head of Consumer Banking | active | [rafiza-ghazali.md](People/rafiza-ghazali.md) |
 
@@ -26,7 +26,7 @@ This is a fast-scan index. To update a person's info, edit their file in `People
 | Salman Khan | PM, Trading, Custody & Stocks (Wealth) | active | [salman-khan.md](People/salman-khan.md) |
 | Tahir Qureshi | PM, Banking IBAN | departed (2026-05-05) | [tahir-qureshi.md](People/tahir-qureshi.md) |
 | Andre Syamsurizal | PM, Indonesia | active | [andre-syamsurizal.md](People/andre-syamsurizal.md) |
-| Gabriel Dzulkifly | PM (likely Indonesia-focused) | onboarding | [gabriel-dzulkifly.md](People/gabriel-dzulkifly.md) |
+| Gabriel Dzulkifly | PM (likely Indonesia-focused) | active | [gabriel-dzulkifly.md](People/gabriel-dzulkifly.md) |
 
 ## Product Operations
 
@@ -73,6 +73,7 @@ This is a fast-scan index. To update a person's info, edit their file in `People
 | Faseeh Abdullah | Front-end Engineer | active | [faseeh-abdullah.md](People/faseeh-abdullah.md) |
 | Ubaid Rajput | Engineer | active | [ubaid-rajput.md](People/ubaid-rajput.md) |
 | Imran Bashir | Engineer | active | [imran-bashir.md](People/imran-bashir.md) |
+| Noman Hassan | Software Engineer | active | [noman-hassan.md](People/noman-hassan.md) |
 
 ## CX / Ops
 
@@ -109,20 +110,18 @@ This is a fast-scan index. To update a person's info, edit their file in `People
 |:--|:--|:--|:--|
 | Alexander Meijer | Keel | Account Manager (key POC) | [alexander-meijer.md](People/alexander-meijer.md) |
 | Lukasz Kosidlo | Keel | Engineering | [lukasz-kosidlo.md](People/lukasz-kosidlo.md) |
+| Saâd Dhif | CipherX | Founder (potential partner) | [saad-dhif.md](People/saad-dhif.md) |
 
-## Other frequent stakeholders (unmigrated stubs)
+## Pending profile creation
 
-These names appear in #ask-dataengineering and other channels but don't yet have full profiles. Create files when context emerges:
+Names appearing in files/channels without People/ entries — create when context is sufficient:
 
-- Ahmed Qurban
-- Deniz Caniguzel
-- Yazan Samara
-
-Other people referenced in conversation (Mon/Nawaz — head of Finance, Mehtap Onder — finance, Hamza Qazi — RWA tokenization) live in MEMORY.md or vendor docs and may merit profiles in future.
-
-## Recently Added / Role Pending Verification
-
-| Name | Known context | Status | File |
-|:--|:--|:--|:--|
-| Noman Hassan | Software Engineer (recently joined ~Apr 15). AI tooling power user, customer discovery (Fasset Fusion), co-developing AI training curriculum with Hamis | onboarding | [noman-hassan.md](People/noman-hassan.md) |
-| Saâd Dhif | Founder, CipherX (Switzerland). Building Shariah-compliant actively managed crypto fund. Mufti Faraz Adam doing Shariah review. Target launch end of June. Salman Khan is Fasset point person. | external | [saad-dhif.md](People/saad-dhif.md) |
+- **Fazal Erabbi** — Backend engineer; HOR-670 (Slack alert, non-USD Keel deposits); IBAN Standup attendee.
+- **Inayat Ullah** — Engineer; HOR-663 and HOR-664 (card billing address).
+- **Areeb Siddiqui** — IBAN Standup attendee.
+- **Muhammad Saqlain** — IBAN Standup attendee.
+- **Muhammad Irfan** — IBAN Standup attendee.
+- **Ritu Raj** — CX & Product Feedback attendee.
+- **Nawaz / Mon** — Finance leads; coordinate document signatures and green-lights.
+- **Kisan** — Handles Fasset license documents (referenced in Mastercard_Issuing context).
+- **Ahmed Qurban, Deniz Caniguzel** — Appear in #ask-dataengineering.
