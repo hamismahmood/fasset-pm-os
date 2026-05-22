@@ -91,10 +91,10 @@ Originally Ibrahim was the signatory; with his transition out, Zane is taking ov
 
 - **Enable ACH Transfers via Due** (HOR-456, **QA**, Zain). Major milestone — US IBANs unlocking ACH receiving and local payouts. In QA as of May 13.
 - **UAE Purpose of Payment Codes** (HOR-481, **QA**, Fazal). Keel SWIFT transfers to UAE need `paymentPurpose.proprietary` populated with the correct 3-char UAE POP code. 16 purpose codes mapped. Two blocked payment incidents (Dec 2025, Apr 2026) drove this.
-- **USD IBAN — Downloadable transaction confirmation PDF** (HOR-537, **In Progress**, Zain). Originally raised by Tahreem. In progress as of May 12.
+- **USD IBAN — Downloadable transaction confirmation PDF** (HOR-537, **QA**, Zain). Originally raised by Tahreem. Moved to QA May 21.
 - **IBAN promo code — cashApp, keel, FexApp** (HOR-542, HOR-560, HOR-561, **QA**, Adnan Khan). All three billing service integrations in QA.
 - **Slack alert when non-USD deposit lands in Keel IBAN** (HOR-670, **QA**, Fazal E Rabbi). New ticket. Moved to QA May 18.
-- **KYC reliance model with Due** (HOR-620, **To Do**, Zain). Shifting to reliance model.
+- **KYC reliance model with Due** (HOR-620, **In Progress**, Zain). Shifting to reliance model. Moved to In Progress May 21.
 - **User pending IBAN-to-USDT internal transfer worriness.** Assigned to Hamis from #productsquad bug roundup. (Untracked in Jira.)
 
 ## Live Operational Issues
@@ -113,6 +113,7 @@ Originally Ibrahim was the signatory; with his transition out, Zane is taking ov
 
 ## Archive
 
+- **HOR-618** — Enable USD IBAN for 19 countries with no Keel restriction (Done, May 20). Countries enabled: Argentina, Bolivia, Brazil, Chile, China, Colombia, Ecuador, Guyana, Kuwait, Nepal, Nigeria, Oman, Paraguay, Peru, Qatar, Saudi Arabia, Suriname, Uruguay. Assigned Zain.
 - **HOR-461** — Account Statement Keel branding & regulatory clarification (Done).
 - **HOR-470** — T&C disclaimer text on Activate USD Account screen, Frost → Keel rebrand (Done, Irfan).
 - **HOR-532** — Sync legal name update from FEX to Keel automatically (Done, Adnan).

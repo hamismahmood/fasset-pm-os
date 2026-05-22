@@ -53,3 +53,4 @@
 | 2026-05-14 | [Supporting Multiple Merchants in PK](2026-05-14-supporting-multiple-merchants-pk.md) | active-followups | P2P_Multiple_Sellers |
 | 2026-05-15 | [Malik Danish / Hamis Sync](2026-05-15-malik-hamis.md) | active-followups | P2P_Multiple_Sellers |
 | 2026-05-15 | [CipherX Discovery Call — Saâd Dhif](2026-05-15-saad-dhif-cipherx.md) | active-followups | — |
+| 2026-05-21 | [IBAN Standup](2026-05-21-iban-standup.md) | archived | Global_USD_Account |

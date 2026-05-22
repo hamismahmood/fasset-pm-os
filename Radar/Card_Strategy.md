@@ -9,6 +9,7 @@ Cards are the top strategic priority per Rafi's mandate. Arundathi owns this. Ha
 - Tether x Fasset gold-backed Visa card announced April 28 — waitlist live
 - 2 new card classes pending Visa approval
 - NI card webhook fix (HOR-563) in QA
+- Card billing address: existing users (HOR-664, **QA** as of May 21, rameez.ali). New card creation flow (HOR-663, In Progress, Inayat Ullah).
 - Credit product — early-stage exploration (#credit--product: Saad, Zane, Arundathi, Faraz Adam, Karim Elgabry)
 
 ## My Role
