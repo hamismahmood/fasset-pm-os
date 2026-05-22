@@ -1,13 +1,13 @@
 # MEETINGS.md (Index)
 *Derived index. Source of truth = individual files in `context/Meetings/`. Past meeting transcripts live in `context/Meetings/Transcripts/`. See `context/SCHEMA.md` for conventions.*
-*Last regenerated: 2026-05-21*
+*Last regenerated: 2026-05-22*
 
 ## Recurring meetings
 
 | Meeting | Cadence | Time | Organizer | Status | File |
 |:--|:--|:--|:--|:--|:--|
 | Product Daily Standup | daily | 19:00 PKT | Zane Motiwala (interim) | active | [product-daily-standup.md](Meetings/product-daily-standup.md) |
-| IBAN Standup | daily | 12:00 PKT | Taha Farooq | active | [iban-standup.md](Meetings/iban-standup.md) |
+| IBAN Standup | daily | 12:45 PKT | Taha Farooq | active | [iban-standup.md](Meetings/iban-standup.md) |
 | Sprint Planning | biweekly | Fri 16:00 PKT | Zara Adalat | active | [sprint-planning.md](Meetings/sprint-planning.md) |
 | CX & Product Feedback | weekly | Fri 17:00 PKT | Nashit Syed | active | [cx-product-feedback.md](Meetings/cx-product-feedback.md) |
 

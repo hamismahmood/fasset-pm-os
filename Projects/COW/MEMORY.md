@@ -1,5 +1,17 @@
+---
+type: project
+name: Customer Obsession Week (COW)
+status: active
+priority: high
+deadline: 2026-05-25
+owner: Hamis Mahmood
+related: []
+last_verified: 2026-05-22
+tags: [user-research, discovery, fasset-fusion, cow]
+---
+
 # COW Project Memory
-*Last updated: 2026-05-20*
+*Last updated: 2026-05-22*
 
 ## Overview
 

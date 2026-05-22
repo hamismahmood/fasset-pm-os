@@ -2,12 +2,12 @@
 type: meeting
 name: IBAN Standup
 cadence: daily
-time: 12:00 PKT
+time: 12:45 PKT
 duration_minutes: 30
 organizer: Taha Farooq
 attendees: [Taha Farooq, Muhammad Zain, Adnan Khan, Faseeh Abdullah, Muhammad Tayyab, Hamis Mahmood, Muhammad Saqlain, Ubaid Rajput, Fazal Erabbi, Muhammad Irfan, Areeb Siddiqui, Salman Khan]
 status: active
-last_verified: 2026-05-21
+last_verified: 2026-05-22
 tags: [iban, eng-sync, daily]
 ---
 

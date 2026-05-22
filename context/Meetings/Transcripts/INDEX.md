@@ -1,6 +1,6 @@
 # Transcripts Index
 *One file per past meeting. Filename format: `YYYY-MM-DD-short-slug.md`. See `../../SCHEMA.md` for the `transcript` type spec.*
-*Last regenerated: 2026-05-21*
+*Last regenerated: 2026-05-22*
 
 | Date | Meeting | Status | Initiative / Project |
 |:--|:--|:--|:--|

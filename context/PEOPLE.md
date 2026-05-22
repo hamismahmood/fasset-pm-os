@@ -1,6 +1,6 @@
 # PEOPLE.md (Index)
 *Derived index. Source of truth = individual files in `context/People/`. See `context/SCHEMA.md` for conventions.*
-*Last regenerated: 2026-05-21*
+*Last regenerated: 2026-05-22*
 
 This is a fast-scan index. To update a person's info, edit their file in `People/` directly — never edit this index by hand to add facts.
 

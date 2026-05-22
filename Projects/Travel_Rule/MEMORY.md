@@ -6,7 +6,7 @@ priority: high
 deadline: 2026-05-22
 owner: Hamis Mahmood
 related: [Salman Khan, Nashit Syed, Taha Farooq, Ralf Jayaprakash, Ameera Iqbal, Notabene, Fireblocks]
-last_verified: 2026-05-18
+last_verified: 2026-05-22
 tags: [aml, declaration-flow, satoshi-test, tiered-verification, vara]
 ---
 

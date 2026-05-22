@@ -4,7 +4,7 @@
 ---
 type: project
 name: Mastercard Card Issuing
-status: research
+status: active
 priority: strategic
 owner: Hamis Mahmood
 support: Arundathi Belur (to be aligned before proposal)

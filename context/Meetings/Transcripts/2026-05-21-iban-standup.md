@@ -1,9 +1,14 @@
 ---
+type: transcript
+name: IBAN Standup — 21 May 2026
 meeting_date: 2026-05-21
 attendees: [Hamis Mahmood, Areeb Siddiqui, Fazal Erabbi, Muhammad Saqlain, Muhammad Zain Ul Abideen, Salman Khan]
 related_initiative: null
 related_project: Global_USD_Account
 source: Tactiq (Google Drive ID: 1NWEkkefJek5h44zMmqiOYEOTaNXNrpBJJjbPfwRCeHQ)
+status: archived
+last_verified: 2026-05-22
+tags: [iban, standup, time-change]
 ---
 
 # IBAN Standup — 21 May 2026
