@@ -44,3 +44,19 @@ Hanya Zafar announced two inaugural Scrum squads starting Sprint 11. Identity an
 
 **2026-05-20 | Sprint 11 tasks due from PMs by May 21 morning — brief sprint**
 Zara asked all PMs to submit Sprint 11 tasks by May 21 morning (or noon). Sprint 11 is a brief sprint serving as soft Scrum kick-off. Source: #productsquad, 2026-05-20.
+
+---
+
+## Entries — 2026-05-22 PM refresh
+
+**2026-05-22 | Sprint 11 scope locked — PM tickers forwarded to engineering (#productsquad)**
+Zara notified PMs at 13:00 PKT that Sprint 11 tasks were being finalized after Juma prayers, with a request to update all Sprint 11-tagged roadmap items immediately. Zara confirmed at 15:29 PKT that tickers submitted by PMs have been forwarded to the engineering team. Sprint 11 scope is now locked. Source: #productsquad, 2026-05-22.
+
+**2026-05-22 | PKR/BDT/ACH confirmed to go live right after the off-site (#productsquad)**
+Salman Khan confirmed PKR/BDT/ACH payouts launch is scheduled to go live right after the Bali off-site. Source: #productsquad, 2026-05-22.
+
+**2026-05-22 | Altof: feature work starts post-Eid/Bali break, ~June 15 release (#product-cs-team)**
+Altof Naufal confirmed to Kashmala Ahmad (CX) that the requested feature work (Identity/Onboarding squad) will begin after the Eid and Bali break. Expected release: around June 15. Source: #product-cs-team, 2026-05-22.
+
+**2026-05-22 | Augustus.com assessed as low-value vendor — not being pursued (#productsquad)**
+Mohsin Hafeez shared Augustus.com as a potential vendor for virtual accounts, settlements, and payouts. Salman Khan assessed it as "very new and offering very limited value proposition" compared to Due. Altof and Kazi were looped in but no further exploration planned. Source: #productsquad, 2026-05-22.
