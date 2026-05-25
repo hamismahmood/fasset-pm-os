@@ -1,5 +1,5 @@
 # MEMORY.md
-*Last updated: 2026-05-25*
+*Last updated: 2026-05-25 (daily-refresher 7pm PKT)*
 
 
 ## Project Workspaces
@@ -56,18 +56,16 @@ Aggregated snapshot of open work across all project workspaces. This is a derive
 | (untracked) | — | Radar/Card_Strategy | Card operator pricing comparison (Ibrahim/Rafi ask). |
 | (untracked) | — | Radar/Card_Strategy | Card issuance payment friction — payment gateway vs USDT/wallet balance (Kazi). |
 | HOR-552 | to-delete | Travel_Rule | PRD: Travel Rule for High-value Crypto Receipts (≥$20K) Satoshi Verification. Summary changed to "delete" — awaiting admin deletion. PRD migrated to Confluence. |
-| HOR-479 | In Progress | Travel_Rule | Implementation of UAE Virtual Assets Travel Rule Requirements (>$1K declaration flow). Ubaid Rajput. |
-| HOR-565 | In Progress | Travel_Rule | Travel Rule Tier 1: UAE Deposit Self-Declaration ($1K-$20K). Ubaid Rajput. |
-| HOR-566 | In Progress | Travel_Rule | Travel Rule Tier 2: UAE High-Value Deposit Verification (>=20K). Ubaid Rajput. |
-| HOR-567 | In Progress | Travel_Rule | Travel Rule Verified Wallet Store (Tier 2 dependency). Ubaid Rajput. |
+| HOR-479 | QA | Travel_Rule | Implementation of UAE Virtual Assets Travel Rule Requirements (>$1K declaration flow). Ubaid Rajput. |
+| HOR-565 | QA | Travel_Rule | Travel Rule Tier 1: UAE Deposit Self-Declaration ($1K-$20K). Ubaid Rajput. |
+| HOR-566 | QA | Travel_Rule | Travel Rule Tier 2: UAE High-Value Deposit Verification (>=20K). Ubaid Rajput. |
+| HOR-567 | To Do | Travel_Rule | Travel Rule Verified Wallet Store (Tier 2 dependency). Ubaid Rajput. Moved back to To Do May 25. |
 | HOR-568 | To Do | Travel_Rule | Travel Rule CX Tooling for Tier 2 Escrow Management. Ubaid Rajput. |
 | HOR-627 | To Do | Travel_Rule | [SAFE Phase 1] Integrate Basic Travel Rule Support with Notabene. Ubaid Rajput. Added May 13. |
 | HOR-561 | QA | Global_USD_Account | IBAN promo code billing service integration (FexApp). Adnan Khan. |
 | HOR-542 | QA | Global_USD_Account | IBAN promo code billing service integration (cash). Adnan Khan. |
 | HOR-560 | QA | Global_USD_Account | IBAN promo code billing service integration (keel). Adnan Khan. |
 | HOR-670 | QA | Global_USD_Account | Slack alert when non-USD deposit lands in Keel IBAN. Fazal E Rabbi. New — moved to QA May 18. |
-| HOR-663 | QA | Radar/Card_Strategy | Card billing address: new card creation flow. Inayat Ullah. Moved to QA May 17. |
-| HOR-664 | QA | Radar/Card_Strategy | Card billing address: existing users. Inayat Ullah. Moved to QA May 20. |
 | (untracked) | — | Radar/Business_Banking | Confirm Keel permission status for corporate entities. |
 | (untracked) | — | Radar/Business_Banking | Define IBAN assignment requirements for corporate accounts. |
 | (untracked) | — | Radar/Business_Banking | Business Banking Website 1st iteration — Markup.io review (Abigail, Hamza). |
@@ -79,6 +77,8 @@ Aggregated snapshot of open work across all project workspaces. This is a derive
 
 **Recently archived (Done in Jira):**
 - HOR-563 — NI card buy: correctly handle non-success webhooks (Radar/Card_Strategy). Done May 15. Inayat Ullah.
+- HOR-663 — Card billing address: new card creation flow (Radar/Card_Strategy). Done May 25. Inayat Ullah.
+- HOR-664 — Card billing address: existing users (Radar/Card_Strategy). Done May 25. Inayat Ullah.
 - HOR-618 — Enable USD IBAN for 19 countries with no Keel restriction (Global_USD_Account). Done May 20. Countries: Argentina, Bolivia, Brazil, Chile, China, Colombia, Ecuador, Guyana, Kuwait, Nepal, Nigeria, Oman, Paraguay, Peru, Qatar, Saudi Arabia, Suriname, Uruguay.
 - HOR-461 — Account Statement Keel branding & regulatory clarification (01_Global_USD_Account).
 - HOR-470 — T&C disclaimer text Frost → Keel rebrand (01_Global_USD_Account).

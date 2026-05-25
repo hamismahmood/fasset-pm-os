@@ -6,7 +6,7 @@ priority: high
 deadline: 2026-05-22
 owner: Hamis Mahmood
 related: [Salman Khan, Nashit Syed, Taha Farooq, Ralf Jayaprakash, Ameera Iqbal, Notabene, Fireblocks]
-last_verified: 2026-05-22
+last_verified: 2026-05-25
 tags: [aml, declaration-flow, satoshi-test, tiered-verification, vara]
 ---
 
@@ -50,15 +50,15 @@ Driven by 2025 AML inspection findings (VARA Travel Rule).
 
 | Ticket | Status | Summary |
 | :---- | :---- | :---- |
-| HOR-479 | In Progress | Implementation of UAE Virtual Assets Travel Rule Requirements. Ubaid Rajput. Last Jira update May 12. |
-| HOR-565 | In Progress | Tier 1: UAE Deposit Self-Declaration ($1K-$20K). Ubaid Rajput. Last Jira update May 13. |
-| HOR-566 | In Progress | Tier 2: UAE High-Value Deposit Verification (≥$20K Satoshi Test). Ubaid Rajput. Last Jira update May 13. |
-| HOR-567 | In Progress | Verified Wallet Store (Tier 2 dependency). Ubaid Rajput. Last Jira update May 13. |
+| HOR-479 | QA | Implementation of UAE Virtual Assets Travel Rule Requirements. Ubaid Rajput. Moved to QA May 25. |
+| HOR-565 | QA | Tier 1: UAE Deposit Self-Declaration ($1K-$20K). Ubaid Rajput. Moved to QA May 25. |
+| HOR-566 | QA | Tier 2: UAE High-Value Deposit Verification (≥$20K Satoshi Test). Ubaid Rajput. Moved to QA May 25. |
+| HOR-567 | To Do | Verified Wallet Store (Tier 2 dependency). Ubaid Rajput. Moved back to To Do May 25. |
 | HOR-568 | To Do | CX Tooling for Tier 2 Escrow Management. Ubaid Rajput. |
 | HOR-627 | To Do | [SAFE Phase 1] Integrate Basic Travel Rule Support with Notabene. Ubaid Rajput. |
 | HOR-552 | to-delete | Original PRD ticket. Now empty (summary "delete"), awaiting admin deletion. PRD migrated to Confluence document. |
 
-**DEADLINE ALERT (May 18):** 4 days to May 22 build deadline. All 6 active tickets unchanged since May 12-13. No Slack discussion visible. Urgent check-in with Ubaid Rajput needed today to confirm whether the May 22 date is still achievable.
+**Status update (May 25):** HOR-479, HOR-565, HOR-566 all moved to QA. HOR-567 (Verified Wallet Store) moved back to To Do — likely re-scoped or deferred. May 22 build deadline has passed; QA now in progress.
 
 ## Open Items
 
