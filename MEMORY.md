@@ -1,5 +1,5 @@
 # MEMORY.md
-*Last updated: 2026-05-22*
+*Last updated: 2026-05-25*
 
 
 ## Project Workspaces
@@ -66,9 +66,8 @@ Aggregated snapshot of open work across all project workspaces. This is a derive
 | HOR-542 | QA | Global_USD_Account | IBAN promo code billing service integration (cash). Adnan Khan. |
 | HOR-560 | QA | Global_USD_Account | IBAN promo code billing service integration (keel). Adnan Khan. |
 | HOR-670 | QA | Global_USD_Account | Slack alert when non-USD deposit lands in Keel IBAN. Fazal E Rabbi. New — moved to QA May 18. |
-| HOR-563 | QA | Radar/Card_Strategy | NI card buy — correctly handle non-success webhooks. Inayat Ullah. |
-| HOR-663 | In Progress | Radar/Card_Strategy | Card billing address: new card creation flow. Inayat Ullah. Created May 13. |
-| HOR-664 | In Progress | Radar/Card_Strategy | Card billing address: existing users. Inayat Ullah. Created May 13. |
+| HOR-663 | QA | Radar/Card_Strategy | Card billing address: new card creation flow. Inayat Ullah. Moved to QA May 17. |
+| HOR-664 | QA | Radar/Card_Strategy | Card billing address: existing users. Inayat Ullah. Moved to QA May 20. |
 | (untracked) | — | Radar/Business_Banking | Confirm Keel permission status for corporate entities. |
 | (untracked) | — | Radar/Business_Banking | Define IBAN assignment requirements for corporate accounts. |
 | (untracked) | — | Radar/Business_Banking | Business Banking Website 1st iteration — Markup.io review (Abigail, Hamza). |
@@ -79,6 +78,7 @@ Aggregated snapshot of open work across all project workspaces. This is a derive
 **Statement of Account note:** Epic HOR-488 and its 5 active stories have never been prioritized into a sprint and remain unassigned. PRD has been through review rounds with Ibrahim. Carry forward to next sprint planning. **NEW (May 7):** Bahrain regulator has requested a consolidated account statement by June 15, flagged as a ~2-week engineering lift. Saad + Zane to manage regulator comms on timeline.
 
 **Recently archived (Done in Jira):**
+- HOR-563 — NI card buy: correctly handle non-success webhooks (Radar/Card_Strategy). Done May 15. Inayat Ullah.
 - HOR-618 — Enable USD IBAN for 19 countries with no Keel restriction (Global_USD_Account). Done May 20. Countries: Argentina, Bolivia, Brazil, Chile, China, Colombia, Ecuador, Guyana, Kuwait, Nepal, Nigeria, Oman, Paraguay, Peru, Qatar, Saudi Arabia, Suriname, Uruguay.
 - HOR-461 — Account Statement Keel branding & regulatory clarification (01_Global_USD_Account).
 - HOR-470 — T&C disclaimer text Frost → Keel rebrand (01_Global_USD_Account).
