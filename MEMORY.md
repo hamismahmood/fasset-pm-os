@@ -1,5 +1,5 @@
 # MEMORY.md
-*Last updated: 2026-05-26 (daily-refresher 7am PKT)*
+*Last updated: 2026-05-26 (daily-refresher 7pm PKT)*
 
 
 ## Project Workspaces
@@ -72,6 +72,7 @@ Aggregated snapshot of open work across all project workspaces. This is a derive
 | HOR-620 | To Do | Global_USD_Account | Shifting to KYC reliance model with Due. Muhammad Zain. New May 11. |
 | HOR-456 | QA | Global_USD_Account | Enable ACH Transfers (Receive & Send USD) via Due (Zain). Major milestone — in QA as of May 13. |
 | (untracked) | — | Radar/WorldPay_PSP | Top-10 country market analysis for WorldPay underwriting (Nawaz ask) — pending framing clarification. |
+| HOR-731 | QA | Global_Expansion | Forbid exchange in Indonesia — adding "ID" to FORBID_EXCHANGE_IN_COUNTRIES (buy/sell/swap/send/receive). Inayat Ullah. New May 25. |
 
 **Statement of Account note:** Epic HOR-488 and its 5 active stories have never been prioritized into a sprint and remain unassigned. PRD has been through review rounds with Ibrahim. Carry forward to next sprint planning. **NEW (May 7):** Bahrain regulator has requested a consolidated account statement by June 15, flagged as a ~2-week engineering lift. Saad + Zane to manage regulator comms on timeline.
 

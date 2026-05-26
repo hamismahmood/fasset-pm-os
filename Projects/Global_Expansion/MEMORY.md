@@ -5,7 +5,7 @@ status: active
 priority: high
 owner: Hamis Mahmood
 related: [Rain, Keel, Due, Saad Pall, Gitesh, Arundathi Belur]
-last_verified: 2026-05-02
+last_verified: 2026-05-26
 tags: [country-prioritization, marketing-led, ssa, mena, war-room]
 ---
 
@@ -60,10 +60,17 @@ Marketing-led expansion into new markets. Workstream channel: **#global-expansio
 - Sukuk savings enabled.
 - Bank transfers re-enabled (2 banks, intra-bank only).
 
+## Active Jira Tasks
+
+| Ticket | Status | Summary |
+| :---- | :---- | :---- |
+| HOR-731 | QA | Forbid exchange in Indonesia — adding "ID" to FORBID_EXCHANGE_IN_COUNTRIES. Blocks buy/sell/swap/send/receive. Inayat Ullah. New May 25. |
+
 ## Active Tasks
 
 - **Hamis to propose 5 additional countries** to Gitesh.
 - **Nigeria T&C update for Rain** — required to enable card KYC in Nigeria. Needs product/legal update, then contact Rain compliance.
+- **Nigeria USD enablement blocked** — Hina Aziz confirmed (May 26) NI is blocked because USD enablement on the NI side is pending. Kazi managing slow comms. Gitesh escalating as main global expansion criteria in CBU group.
 - **Altof's Product Coverage Confluence page** — comprehensive product coverage and live status by jurisdiction/country. Awaiting PM team confirmation before broader sharing.
 - **Product Coverage & Country Restrictions** — cross-referencing IBAN-disabled countries (33) against Keel's prohibited/restricted jurisdictions and Due's 21 prohibited countries. **10 Keel-restricted countries are NOT IBAN-disabled — potential gap to confirm.**
 

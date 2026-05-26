@@ -1,6 +1,6 @@
 # COMPANY_ONGOINGS.md
 *This file is now an index pointing into `00_Resources/Initiatives/`.*
-*Last updated: 2026-05-22*
+*Last updated: 2026-05-26*
 
 Cross-cutting evolving company context lives as one file per initiative under `00_Resources/Initiatives/`. Each initiative file has frontmatter (`status`, `priority`, `owner`, `last_verified`) and is the source of truth. Cowork can update an initiative file directly when meeting transcripts or Slack updates carry new info, instead of editing this single mega-doc.
 
@@ -60,3 +60,19 @@ Altof Naufal confirmed to Kashmala Ahmad (CX) that the requested feature work (I
 
 **2026-05-22 | Augustus.com assessed as low-value vendor — not being pursued (#productsquad)**
 Mohsin Hafeez shared Augustus.com as a potential vendor for virtual accounts, settlements, and payouts. Salman Khan assessed it as "very new and offering very limited value proposition" compared to Due. Altof and Kazi were looped in but no further exploration planned. Source: #productsquad, 2026-05-22.
+
+---
+
+## Entries — 2026-05-26 7pm refresh
+
+**2026-05-26 | Bali Fusion retreat final schedule confirmed — Salman Khan to cover for Altof Naufal**
+Zane Motiwala confirmed the final schedule for the Bali Fusion off-site, noting in #productsquad that Salman Khan can backup Altof Naufal if needed (as discussed in today's standup). Source: #productsquad, 2026-05-26.
+
+**2026-05-26 | Nigeria USD enablement blocked — confirmed as main global expansion blocker**
+Hina Aziz confirmed in #global-expansion that Nigeria (NI) card KYC is blocked because USD enablement on the NI side is pending. Kazi is managing comms but progress is very slow (back-and-forth email threads). Gitesh escalated this as the main criteria for global scaling and requested it be raised as part of the CBU group discussion. Source: #global-expansion, 2026-05-26.
+
+**2026-05-26 | HOR-731 created and in QA — Indonesia exchange forbidden**
+New Jira ticket HOR-731 ("Forbid exchange in Indonesia") reached QA status. Blocks all crypto transactions in Indonesia: buy, sell, swap, send, and receive — by adding "ID" to FORBID_EXCHANGE_IN_COUNTRIES. Inayat Ullah (reporter and assignee). Significant regulatory compliance action affecting the Indonesia market strategy. Source: Jira, 2026-05-25.
+
+**2026-05-26 | Refund transaction UI bug surfaced — "-" sign causing user confusion**
+Kashmala Ahmad flagged in #product-cs-team that the "-" sign displayed on refund transactions is causing user confusion (users believe money is being deducted, not refunded). Nashit Syed escalated to Mudassar to fix. Source: #product-cs-team, 2026-05-26.
