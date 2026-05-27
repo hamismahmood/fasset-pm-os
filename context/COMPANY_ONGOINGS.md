@@ -76,3 +76,16 @@ New Jira ticket HOR-731 ("Forbid exchange in Indonesia") reached QA status. Bloc
 
 **2026-05-26 | Refund transaction UI bug surfaced — "-" sign causing user confusion**
 Kashmala Ahmad flagged in #product-cs-team that the "-" sign displayed on refund transactions is causing user confusion (users believe money is being deducted, not refunded). Nashit Syed escalated to Mudassar to fix. Source: #product-cs-team, 2026-05-26.
+
+---
+
+## Entries — 2026-05-27 7am refresh
+
+**2026-05-27 | EMF-1949: USDT TRC-20 deposit not reflecting for user (#tech-meets-fex)**
+User attempted a USDT deposit via TRC-20 network that did not reflect in their account. High-priority ticket assigned to Taha Farooq. Reported by CX agent Bintang (Zendesk ticket 53593, created 2026-05-26). Source: #tech-meets-fex, 2026-05-26.
+
+**2026-05-27 | EMF-1950: Card activation coupon AKTLGY overcharged — $9.99 billed instead of $0.99 (#tech-meets-fex)**
+User applied coupon code AKTLGY during card activation. The discounted amount of $0.99 was displayed pre-confirmation, but $9.99 was charged. User requesting refund. High-priority bug assigned to Taha Farooq. Reported by CX agent Tamim (Zendesk ticket 53611, created 2026-05-27). Source: #tech-meets-fex, 2026-05-26.
+
+**2026-05-27 | EMF-1951: P2P first-time restriction expired but asset remains locked (#tech-meets-fex)**
+User's assets were locked under the first-time P2P restriction until 27/05 at 17:47. After the restriction period ended, assets remained locked. High-priority bug assigned to Taha Farooq. Reported by CX agent Haura (Zendesk ticket 53639, created 2026-05-27). Source: #tech-meets-fex, 2026-05-27.
