@@ -89,3 +89,13 @@ User applied coupon code AKTLGY during card activation. The discounted amount of
 
 **2026-05-27 | EMF-1951: P2P first-time restriction expired but asset remains locked (#tech-meets-fex)**
 User's assets were locked under the first-time P2P restriction until 27/05 at 17:47. After the restriction period ended, assets remained locked. High-priority bug assigned to Taha Farooq. Reported by CX agent Haura (Zendesk ticket 53639, created 2026-05-27). Source: #tech-meets-fex, 2026-05-27.
+
+---
+
+## Entries — 2026-05-28 7am refresh
+
+**2026-05-28 | Cluster of pending crypto withdrawal bugs — 4 new EMF tickets in 24 hours (#tech-meets-fex)**
+A recurring pattern of crypto withdrawals stuck in pending/processing state generated four high-priority EMF tickets across 2026-05-27 and 2026-05-28. EMF-1952 (Haura, 7 users, Zendesk 53558/53677/53675/53704/53714/53639/53721), EMF-1954 (Tamim, 3 users, Zendesk 53677/53736/53740), EMF-1955 (Tamim, 3 users, Zendesk 53747/53741/53714). All high severity, all assigned to Taha Farooq. Volume and recurrence across different agents and user cohorts suggests a systemic withdrawal pipeline issue. Source: #tech-meets-fex, 2026-05-27 to 2026-05-28.
+
+**2026-05-28 | EMF-1953: USDC deposit via Polygon network not received (#tech-meets-fex)**
+User deposited USDC on the Polygon network but funds have not arrived in their wallet. High-priority ticket assigned to Taha Farooq. Reported by CX agent Haura (Zendesk ticket 53446, created 2026-05-27). Source: #tech-meets-fex, 2026-05-27.
