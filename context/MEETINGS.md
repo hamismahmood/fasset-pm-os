@@ -1,6 +1,6 @@
 # MEETINGS.md (Index)
 *Derived index. Source of truth = individual files in `context/Meetings/`. Past meeting transcripts live in `context/Meetings/Transcripts/`. See `context/SCHEMA.md` for conventions.*
-*Last regenerated: 2026-05-22*
+*Last regenerated: 2026-05-29*
 
 ## Recurring meetings
 
@@ -14,6 +14,7 @@
 ## 1:1s and other regular syncs (mentioned, not yet filed)
 - Hamis ⇄ Zane Friday 1:1 (booked, push for IBAN squad independence + ownership lines).
 - Hamis ⇄ Noman Hassan — co-developing AI training curriculum; recurring as of May 15.
+- **Money Movement — Daily Standup** — New recurring meeting created 2026-05-29 by Zara Adalat. Attendees: Muhammad Zain, Muhammad Saqlain, Fazal Erabbi, Areeb Siddiqui, Taha Farooq, Faseeh Abdullah, Muhammad Fahad, Kazi Hasan. Hamis accepted. Not yet filed as a standalone meeting file.
 
 ## Past meetings (transcripts)
 See `Transcripts/` directory. Filename format: `YYYY-MM-DD-short-slug.md`.

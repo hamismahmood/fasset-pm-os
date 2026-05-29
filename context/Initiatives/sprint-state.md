@@ -3,10 +3,10 @@ type: initiative
 name: Sprint State
 status: active
 priority: high
-current_sprint: 10
-sprint_started: 2026-05-08
+current_sprint: 11
+sprint_started: 2026-05-25
 owner: Zara Adalat
-last_verified: 2026-05-13
+last_verified: 2026-05-29
 tags: [sprint, planning, capacity]
 ---
 

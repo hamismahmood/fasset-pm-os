@@ -6,7 +6,7 @@ priority: critical
 started: 2026-04-08
 expected_resolution: 2026-05-14
 owner: Saad Pall
-last_verified: 2026-05-14
+last_verified: 2026-05-29
 tags: [departures, kt, backfilling, head-of-product, eng-manager]
 ---
 

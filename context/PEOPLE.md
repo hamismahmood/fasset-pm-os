@@ -1,6 +1,6 @@
 # PEOPLE.md (Index)
 *Derived index. Source of truth = individual files in `context/People/`. See `context/SCHEMA.md` for conventions.*
-*Last regenerated: 2026-05-22*
+*Last regenerated: 2026-05-29*
 
 This is a fast-scan index. To update a person's info, edit their file in `People/` directly — never edit this index by hand to add facts.
 
@@ -125,3 +125,10 @@ Names appearing in files/channels without People/ entries — create when contex
 - **Nawaz / Mon** — Finance leads; coordinate document signatures and green-lights.
 - **Kisan** — Handles Fasset license documents (referenced in Mastercard_Issuing context).
 - **Ahmed Qurban, Deniz Caniguzel** — Appear in #ask-dataengineering.
+- **Usman Kazmi** (usman.kazmi@fasset.com) — IBAN Standup attendee. First seen May 2026 Calendar. *Added 2026-05-29.*
+- **Naveen Zehra** (naveen.zehra@fasset.com) — IBAN Standup attendee. First seen May 2026 Calendar. *Added 2026-05-29.*
+- **Muhammad Fahad** (muhammad.fahad@fasset.com) — IBAN Standup + Money Movement Backlog Grooming attendee. *Added 2026-05-29.*
+- **Ayman Hassen** (ayman.hassen@fasset.com) — Product Daily Standup attendee. *Added 2026-05-29.*
+- **Maksud Khan** (maksud.khan@fasset.com) — CX & Product Feedback attendee. *Added 2026-05-29.*
+- **Mohamed Sabra** (mohamed.sabra@fasset.com) — CX & Product Feedback attendee. *Added 2026-05-29.*
+- **Zainab Aahad** (zainab.aahad@fasset.com) — Daily CBU Standup organizer/attendee. *Added 2026-05-29.*

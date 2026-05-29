@@ -4,7 +4,7 @@ name: KYC Evolution
 status: active
 priority: high
 owner: Altof Naufal
-last_verified: 2026-05-04
+last_verified: 2026-05-29
 tags: [kyc, jumio, sumsub, veriff, poa, reusable-kyc]
 ---
 

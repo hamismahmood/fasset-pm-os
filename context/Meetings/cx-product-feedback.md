@@ -7,7 +7,7 @@ duration_minutes: 30
 organizer: Nashit Syed
 attendees: [Nashit Syed, PMs, Ritu Raj, CX team]
 status: active
-last_verified: 2026-05-08
+last_verified: 2026-05-29
 tags: [cx, weekly, ticket-trends]
 ---
 

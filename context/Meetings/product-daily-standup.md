@@ -7,7 +7,7 @@ duration_minutes: 15
 organizer: Zane Motiwala (interim, post-Ibrahim)
 attendees: [Zane Motiwala, Hamis Mahmood, Arundathi Belur, Kazi Hasan, Salman Khan, Mohsin Hafeez, Altof Naufal, Andre Syamsurizal, Hina Aziz, Zara Adalat, Hanya Zafar]
 status: active
-last_verified: 2026-05-21
+last_verified: 2026-05-29
 tags: [product, daily, gemini-recorded]
 ---
 
@@ -23,3 +23,4 @@ Daily product alignment across PMs, EMs, scrum master, design.
 - Originally organized by Ibrahim Ali; continuing under Zane's interim lead post-departure.
 - Time was rescheduled in late April to accommodate Zane's US timezone.
 - ~10 attendees typical.
+- **Calendar drift (2026-05-29):** Google Calendar still shows Ibrahim Ali as organizer. Zane is running the meeting in practice — no action needed unless you want to formally transfer ownership on Calendar.
