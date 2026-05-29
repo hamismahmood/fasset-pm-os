@@ -99,3 +99,16 @@ A recurring pattern of crypto withdrawals stuck in pending/processing state gene
 
 **2026-05-28 | EMF-1953: USDC deposit via Polygon network not received (#tech-meets-fex)**
 User deposited USDC on the Polygon network but funds have not arrived in their wallet. High-priority ticket assigned to Taha Farooq. Reported by CX agent Haura (Zendesk ticket 53446, created 2026-05-27). Source: #tech-meets-fex, 2026-05-27.
+
+---
+
+## Entries — 2026-05-29 7pm refresh
+
+**2026-05-29 | App "Connection Lost" bug cluster — multiple EMF tickets, app v6.8 (#tech-meets-fex)**
+Three new EMF tickets (EMF-1959, EMF-1960, EMF-1963) created 2026-05-29 for users experiencing "App showing Connection Lost display." All reported via CX agent Bintang Anugrah. Pattern escalated by Mohsin Hafeez at ~11:30 PKT noting multiple tickets for the same issue. Hina Aziz confirmed downstream systems are fine and directed CX to collect device and app version for all such reports. By 18:00 PKT the affected-user count had grown to at least 7 across Zendesk tickets 53832, 53866, 53917, 53942, 53951, 54007, 54015 — all on app version 6.8 across multiple Android devices. Investigation ongoing, no fix confirmed as of end of day. Source: #tech-meets-fex, 2026-05-29.
+
+**2026-05-29 | EMF-1958 crypto withdrawal resolved — no Fireblocks transaction found, marked done (#tech-meets-fex)**
+User reported a crypto withdrawal not reflected on their external wallet (EMF-1958, Bintang Anugrah). Salman Khan checked Fireblocks and found no matching transaction. After Hina provided the wallet address (0x73175EdeE6Ff04310F82896eb093C98aFf697190), Salman confirmed it was resolved from Fasset's side and instructed CX to inform the user. Source: #tech-meets-fex, 2026-05-29.
+
+**2026-05-29 | Manually KYC-approved users blocked from Fasset Card apply — root cause confirmed (#tech-meets-fex)**
+Imran Bashir confirmed that users whose KYC was manually approved have `jumioData.verificationStatus = 0`, which blocks them from applying for the Fasset Card. Root cause: CX incorrectly entered DOB during manual approval in at least one confirmed case. Inayat Ullah fixed the affected user's DOB and confirmed card application was unblocked. Imran confirmed this is user-specific, not a systemic issue affecting all manually-approved users. Nashit Syed involved. Source: #tech-meets-fex, 2026-05-29.
